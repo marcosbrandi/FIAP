@@ -52,8 +52,12 @@ formato de e-mail, telefone, campos obrigatórios).
 
 
 
-# Funcionalidades e Demonstração da Aplicação 
-:hammer: 
+# Funcionalidades e Demonstração da Aplicação  :hammer: 
+
+![Domain Story Telling](https://github.com/marcosbrandi/FIAP/assets/7784571/b05b863c-ca48-4bfd-830c-8ac9ff26bdf9)
+<!--
+![Domain Story Telling](https://github.com/marcosbrandi/FIAP/blob/master/Docs/Domain%20Storytelling/Domain%20Story%20Telling.jpg)
+-->
 
 - `Funcionalidade 1`: descrição da funcionalidade 1
 - `Funcionalidade 2`: descrição da funcionalidade 2
