@@ -1,4 +1,4 @@
-<h1 align="center">Tech Challenge FIAP - Grupo#60 ©</h1>
+
 
 :construction: Projeto em construção :construction:
 
@@ -20,11 +20,22 @@
 * [Licença](#licença)
 * [Conclusão](#conclusão)
 
+# Título e Imagem de capa
+
+<h1 align="center">Tech Challenge FIAP - Grupo#60 ©</h1>
+
+# Badges
+
+![Badge em Desenvolvimento](http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge)
+
+
+
 # Descrição do Projeto
 
 
 
-  # :hammer: Funcionalidades do projeto
+# Funcionalidades e Demonstração da Aplicação 
+:hammer: 
 
 - `Funcionalidade 1`: descrição da funcionalidade 1
 - `Funcionalidade 2`: descrição da funcionalidade 2
