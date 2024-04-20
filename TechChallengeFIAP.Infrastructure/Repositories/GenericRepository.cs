@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TechChallengeFIAP.Core.Entities;
 using TechChallengeFIAP.Core.Interfaces;
-//using TechChallengeFIAP.Core.Specifications;
 using TechChallengeFIAP.Infrastracture.Data;
 
 namespace TechChallengeFIAP.Infrastracture.Repositories
@@ -14,9 +13,18 @@ namespace TechChallengeFIAP.Infrastracture.Repositories
         {
             _fiapContext = fiapContext;
         }
-        public void DeleteAsync(T entity)
+
+        public async Task DeleteAsync(T entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _fiapContext.Remove<T>(entity);
+                await _fiapContext.SaveChangesAsync();
+            }
+            catch
+            {
+                throw;
+            }
         }
 
         public async Task<IReadOnlyList<T>> GetAllAsync()
@@ -25,43 +33,68 @@ namespace TechChallengeFIAP.Infrastracture.Repositories
             {
                 return await _fiapContext.Set<T>().ToListAsync();
             }
-            catch (Exception)
+            catch
             {
                 throw;
             }
         }
 
-        public async Task<T> GetByIdAsync(int id)
+        public async Task<T?> GetByIdAsync(int id)
         {
             try
             {
                 return await _fiapContext.Set<T>().FindAsync(id);
             }
-            catch (Exception)
+            catch
             {
-
                 throw;
             }
         }
-        public void UpdateAsync(T entity)
+        public async Task UpdateAsync(T entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _fiapContext.Attach<T>(entity);
+                _fiapContext.Entry(entity).State = EntityState.Modified;
+                _fiapContext.Update(entity);
+                await _fiapContext.SaveChangesAsync();
+            }
+            catch
+            {
+                throw;
+            }
         }
 
         public void Add(T entity)
         {
-            _fiapContext.Add<T>(entity);
         }
 
         public void Update(T entity)
         {
-            _fiapContext.Attach<T>(entity);
-            _fiapContext.Entry(entity).State = EntityState.Modified;
+            try
+            {
+                _fiapContext.Attach<T>(entity);
+                _fiapContext.Entry(entity).State = EntityState.Modified;
+                _fiapContext.Update(entity);
+                _fiapContext.SaveChanges();
+            }
+            catch
+            {
+                throw;
+            }
         }
 
         public void Delete(T entity)
         {
-            _fiapContext.Set<T>().Remove(entity);
+            try
+            {
+                _fiapContext.Remove<T>(entity);
+                _fiapContext.SaveChangesAsync();
+            }
+            catch
+            {
+                throw;
+            }
         }
 
         public async Task<int> CountAsync()
@@ -69,9 +102,17 @@ namespace TechChallengeFIAP.Infrastracture.Repositories
             return await _fiapContext.Set<T>().CountAsync();
         }
 
-        public async void AddAsync(T entity)
+        public async Task AddAsync(T entity)
         {
-            await _fiapContext.AddAsync<T>(entity);
+            try
+            {
+                await _fiapContext.AddAsync<T>(entity);
+                await _fiapContext.SaveChangesAsync();
+            }
+            catch
+            {
+                throw;
+            }
         }
     }
 }
