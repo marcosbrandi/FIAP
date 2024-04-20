@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TechChallengeFIAP.Errors
+﻿namespace TechChallengeFIAP.Errors
 {
     public class APIResponse
     {
@@ -8,11 +6,12 @@ namespace TechChallengeFIAP.Errors
         public int statusCode { get; set; }
         public string Message { get; set; }
 
-        public APIResponse(int StatusCode, string  message = null)
+        public APIResponse(int StatusCode, string? message = null)
         {
             statusCode = StatusCode;
             Message = message ?? DefaultStatusCodeMessage(StatusCode);
         }
+
         private string DefaultStatusCodeMessage(int StatusCode)
         {
             return StatusCode switch
