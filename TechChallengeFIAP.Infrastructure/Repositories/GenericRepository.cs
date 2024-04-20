@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TechChallengeFIAP.Core.Entities;
 using TechChallengeFIAP.Core.Interfaces;
-//using TechChallengeFIAP.Core.Specifications;
 using TechChallengeFIAP.Infrastracture.Data;
 
 namespace TechChallengeFIAP.Infrastracture.Repositories
@@ -14,9 +13,17 @@ namespace TechChallengeFIAP.Infrastracture.Repositories
         {
             _fiapContext = fiapContext;
         }
-        public void DeleteAsync(T entity)
+        public async Task DeleteAsync(T entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _fiapContext.Remove<T>(entity);
+                await _fiapContext.SaveChangesAsync();
+            }
+            catch
+            {
+                throw;
+            }
         }
 
         public async Task<IReadOnlyList<T>> GetAllAsync()
@@ -43,7 +50,7 @@ namespace TechChallengeFIAP.Infrastracture.Repositories
                 throw;
             }
         }
-        public void UpdateAsync(T entity)
+        public async Task UpdateAsync(T entity)
         {
             throw new NotImplementedException();
         }
@@ -72,6 +79,11 @@ namespace TechChallengeFIAP.Infrastracture.Repositories
         public async void AddAsync(T entity)
         {
             await _fiapContext.AddAsync<T>(entity);
+        }
+
+        Task IGenericRepository<T>.AddAsync(T entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }

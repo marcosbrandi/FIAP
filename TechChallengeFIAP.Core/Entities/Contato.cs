@@ -4,8 +4,6 @@ namespace TechChallengeFIAP.Core.Entities
 {
     public class Contato : BaseEntity
     {
-        protected Contato() { }
-
         [Required(ErrorMessage = "Nome não informado", AllowEmptyStrings = false)]
         [Display(Name = "Nome", Description = "Informe o Nome do Contato.")]
         [StringLength(100, ErrorMessage = "O campo Nome permite até 100 caracteres")]
