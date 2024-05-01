@@ -18,6 +18,6 @@ namespace TechChallengeFIAP.Core.Entities
         [StringLength(200, ErrorMessage = "O campo e-Mail permite até 100 caracteres")]
         public required string Email { get; set; }
 
-
+         
     }
 }

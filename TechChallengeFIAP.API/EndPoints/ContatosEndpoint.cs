@@ -12,41 +12,68 @@ namespace TechChallengeFIAP.API.EndPoints
 
             var group = app.MapGroup(baseUrl);
 
-            group.MapGet("/", async (FiapDbContext db) => await db.Contatos.ToListAsync());
+            group.MapGet("/", async (FiapDbContext db) => 
+            {
+                //Teste.AdicionarDadosTeste(db);    
+                await db.Contatos.ToListAsync();
+            });
 
             group.MapGet("/{id:int}", async (int id, FiapDbContext db) => await db.Contatos.FindAsync(id) is Contato item ? Results.Ok(item) : Results.NotFound());
 
             group.MapPost("", async (Contato contato, FiapDbContext db) =>
             {
-                db.Contatos.Add(contato);
-                await db.SaveChangesAsync();
-                return Results.Created($"{baseUrl}/{contato.Id}", contato);
+                try
+                {
+                    db.Contatos.Add(contato);
+                    await db.SaveChangesAsync();
+                    return Results.Created($"{baseUrl}/{contato.Id}", contato);
+                }
+                catch (Exception ex)
+                {
+                    //throw;
+                    return Results.BadRequest();
+                }
+
             });
 
             group.MapPut("/{id:int}", async (int id, Contato contato, FiapDbContext db) =>
             {
-                var existItem = await db.Contatos.FindAsync(id);
+                try
+                {
+                    var existItem = await db.Contatos.FindAsync(id);
+                    if (existItem is null) return Results.NotFound();
 
-                if (existItem is null) return Results.NotFound();
-
-                existItem.Nome = contato.Nome;
-                existItem.Telefone = contato.Telefone;
-                existItem.Email = contato.Email;
-                await db.SaveChangesAsync();
-
-                return Results.NoContent();
+                    existItem.Nome = contato.Nome;
+                    existItem.Telefone.DDD = contato.Telefone.DDD;
+                    existItem.Telefone.Numero = contato.Telefone.Numero;
+                    existItem.Email = contato.Email;
+                    await db.SaveChangesAsync();
+                    return Results.NoContent();
+                }
+                catch (Exception ex)
+                {
+                    //throw;
+                    return Results.BadRequest();
+                }
             });
 
             group.MapDelete("/{id:int}", async (int id, FiapDbContext db) =>
             {
-                if (await db.Contatos.FindAsync(id) is Contato contato)
+                try
                 {
-                    db.Contatos.Remove(contato);
-                    await db.SaveChangesAsync();
-                    return Results.NoContent();
+                    if (await db.Contatos.FindAsync(id) is Contato contato)
+                    {
+                        db.Contatos.Remove(contato);
+                        await db.SaveChangesAsync();
+                        return Results.NoContent();
+                    }
+                    return Results.NotFound();
                 }
-
-                return Results.NotFound();
+                catch (Exception ex)
+                {
+                    //throw;
+                    return Results.BadRequest();
+                }
             });
 
 
@@ -68,35 +95,25 @@ namespace TechChallengeFIAP.API.EndPoints
     }
 
 
-
-
     public static class Teste
     {
         public static void AdicionarDadosTeste(FiapDbContext context)
         {
+            if (context.Contatos.Count() > 0) return;
+
             var testeContato1 = new Contato
             {
-                //Id = "usuario1",
+                Id = 123456,
                 Nome = "Teste",
                 Email = "teste@gmail.com",
                 Telefone = new Telefone { DDD = "11", Numero = "981498979" }
             };
             context.Contatos.Add(testeContato1);
 
-            /*
-            var testePost1 = new Models.Post
-            {
-                Id = "post1",
-                UsuarioId = testeUsuario1.Id,
-                Conteudo = "Primeiro Post(post1) do Usuario : usuario1"
-            };
-            */
-
-            context.Contatos.Add(testeContato1);
-
             context.SaveChanges();
         }
     }
+
 
 }
 
