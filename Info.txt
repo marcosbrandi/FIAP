@@ -1,0 +1,18 @@
+F:\Git
+md FIAP
+cd FIAP
+dotnet new web -o TechChallengeFIAP.API
+dotnet new gitignore
+code .
+dotnet dev-certs https –trust
+
+dotnet tool install --global dotnet-ef
+dotnet ef migrations add InitialCreation
+dotnet ef database update
+
+dotnet add package Microsoft.EntityFrameworkCore.InMemory --version 8.0.4
+dotnet add package Microsoft.EntityFrameworkCore.Sqlite --version 8.0
+
+dotnet add package Microsoft.EntityFrameworkCore.Design --version 8.0
+
+

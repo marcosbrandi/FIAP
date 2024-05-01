@@ -4,7 +4,7 @@ namespace TechChallengeFIAP.Core.Entities
 {
     public class Contato : BaseEntity
     {
-        protected Contato() { }
+        public Contato() { }
 
         [Required(ErrorMessage = "Nome não informado", AllowEmptyStrings = false)]
         [Display(Name = "Nome", Description = "Informe o Nome do Contato.")]
