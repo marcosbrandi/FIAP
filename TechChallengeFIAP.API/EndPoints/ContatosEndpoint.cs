@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using TechChallengeFIAP.Core.Entities;
+﻿using TechChallengeFIAP.Core.Entities;
+using TechChallengeFIAP.Core.Interfaces;
 using TechChallengeFIAP.Infrastracture.Data;
 
 namespace TechChallengeFIAP.API.EndPoints
@@ -12,11 +12,15 @@ namespace TechChallengeFIAP.API.EndPoints
 
             var group = app.MapGroup(baseUrl);
 
-            group.MapGet("/", async (FiapDbContext db) => 
+            group.MapGet("/", async (IContatoRepository contatoRepository) =>
             {
-                //Teste.AdicionarDadosTeste(db);    
-                await db.Contatos.ToListAsync();
+                await contatoRepository.GetAllAsync("");
             });
+
+            //group.MapGet("/", async (FiapDbContext db) => 
+            //{
+            //    await db.Contatos.ToListAsync();
+            //});
 
             group.MapGet("/{id:int}", async (int id, FiapDbContext db) => await db.Contatos.FindAsync(id) is Contato item ? Results.Ok(item) : Results.NotFound());
 
@@ -28,9 +32,8 @@ namespace TechChallengeFIAP.API.EndPoints
                     await db.SaveChangesAsync();
                     return Results.Created($"{baseUrl}/{contato.Id}", contato);
                 }
-                catch (Exception ex)
+                catch
                 {
-                    //throw;
                     return Results.BadRequest();
                 }
 
@@ -50,9 +53,8 @@ namespace TechChallengeFIAP.API.EndPoints
                     await db.SaveChangesAsync();
                     return Results.NoContent();
                 }
-                catch (Exception ex)
+                catch
                 {
-                    //throw;
                     return Results.BadRequest();
                 }
             });
@@ -69,9 +71,8 @@ namespace TechChallengeFIAP.API.EndPoints
                     }
                     return Results.NotFound();
                 }
-                catch (Exception ex)
+                catch
                 {
-                    //throw;
                     return Results.BadRequest();
                 }
             });
