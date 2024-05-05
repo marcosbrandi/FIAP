@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TechChallengeFIAP.Core.Entities
 {
+    //[ComplexType]
     [NotMapped]
     public class Telefone
     {
