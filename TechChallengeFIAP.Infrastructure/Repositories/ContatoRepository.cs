@@ -41,12 +41,12 @@ namespace TechChallengeFIAP.Infrastructure.Repositories
             return contato;
         }
 
-        public async Task<IEnumerable<Contato>> GetAllAsync(string DDD)
+        public async Task<IEnumerable<Contato>> GetAllAsync(string? DDD)
         {
             var contatos = await _dbContext.Contatos.Where(x => DDD == x.Telefone.DDD || DDD == null).ToListAsync();
 
-            if (contatos == null)
-                throw new InvalidOperationException($"Contatos com o DDD: {DDD} não encontrado.");
+            if (contatos == null || contatos.Count == 0)
+                throw new InvalidOperationException($"Contatos com o DDD: {(DDD is null ? "nulo" : DDD)} não encontrado.");
 
             return contatos;
         }

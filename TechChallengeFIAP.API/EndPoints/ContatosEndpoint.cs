@@ -14,22 +14,16 @@ namespace TechChallengeFIAP.API.EndPoints
 
             group.MapGet("/", async (IContatoRepository contatoRepository) =>
             {
-                await contatoRepository.GetAllAsync("");
+                return Results.Ok(await contatoRepository.GetAllAsync(null));
             });
-
-            //group.MapGet("/", async (FiapDbContext db) => 
-            //{
-            //    await db.Contatos.ToListAsync();
-            //});
 
             group.MapGet("/{id:int}", async (int id, FiapDbContext db) => await db.Contatos.FindAsync(id) is Contato item ? Results.Ok(item) : Results.NotFound());
 
-            group.MapPost("", async (Contato contato, FiapDbContext db) =>
+            group.MapPost("", async (Contato contato, IContatoRepository contatoRepository) =>
             {
                 try
                 {
-                    db.Contatos.Add(contato);
-                    await db.SaveChangesAsync();
+                    await contatoRepository.AddAsync(contato);
                     return Results.Created($"{baseUrl}/{contato.Id}", contato);
                 }
                 catch
