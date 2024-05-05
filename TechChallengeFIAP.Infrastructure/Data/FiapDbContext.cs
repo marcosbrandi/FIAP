@@ -11,8 +11,6 @@ namespace TechChallengeFIAP.Infrastracture.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<Contato>().HasKey(x => x.Id);
-            //modelBuilder.Entity<Contato>().ComplexProperty(c => c.Telefone);
         }
 
     }

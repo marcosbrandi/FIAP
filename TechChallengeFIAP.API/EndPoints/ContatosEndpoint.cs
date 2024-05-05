@@ -1,4 +1,5 @@
-﻿using TechChallengeFIAP.Core.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using TechChallengeFIAP.Core.Entities;
 using TechChallengeFIAP.Core.Interfaces;
 using TechChallengeFIAP.Infrastracture.Data;
 
@@ -12,10 +13,11 @@ namespace TechChallengeFIAP.API.EndPoints
 
             var group = app.MapGroup(baseUrl);
 
-            group.MapGet("/", async (IContatoRepository contatoRepository) =>
+            group.MapGet("/", async (FiapDbContext db) =>
             {
-                return Results.Ok(await contatoRepository.GetAllAsync(null));
+                return await db.Contatos.ToListAsync();
             });
+
 
             group.MapGet("/{id:int}", async (int id, FiapDbContext db) => await db.Contatos.FindAsync(id) is Contato item ? Results.Ok(item) : Results.NotFound());
 
