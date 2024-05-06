@@ -1,8 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using TechChallengeFIAP.API.EndPoints;
+using TechChallengeFIAP.API;
 using TechChallengeFIAP.Infrastracture.Data;
-
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,15 +11,17 @@ builder.Services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title
 
 builder.Services.AddDbContext<FiapDbContext>( opt => opt.UseInMemoryDatabase(databaseName: "fiap") );
 
+// declara interfaces
+Interfaces.Add(builder.Services);
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment()) { app.UseDeveloperExceptionPage(); }
 
 app.UseSwagger();
 
-
-ContatosEndpoint.Map(app);
-
+// declara endpoints
+Endpoints.Set(app);
 
 app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Contatos API V1"); });
 

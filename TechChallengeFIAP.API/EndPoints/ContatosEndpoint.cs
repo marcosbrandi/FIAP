@@ -1,119 +1,103 @@
-﻿using Microsoft.EntityFrameworkCore;
-using TechChallengeFIAP.Core.Entities;
-using TechChallengeFIAP.Infrastracture.Data;
+﻿using TechChallengeFIAP.Core.Entities;
+using TechChallengeFIAP.Core.Interfaces;
 
-namespace TechChallengeFIAP.API.EndPoints
+namespace TechChallengeFIAP.API.EndPoints;
+
+public static class ContatosEndpoint
 {
-    public static class ContatosEndpoint
+    public static void Map(WebApplication app)
     {
-        public static void Map(WebApplication app)
+        const string baseUrl = @"/v1/contatos";
+
+        var group = app.MapGroup(baseUrl);
+         
+        group.MapGet("/", async (IRepository<Contato> repository) => 
         {
-            const string baseUrl = @"/v1/contatos";
+            if (repository.Count() == 0)
+                Teste.AdicionarDadosTeste(repository);
 
-            var group = app.MapGroup(baseUrl);
+            var ret = await repository.GetAllWithTrackingAsync(d=> d==d, r => r.Telefones);
+            return Results.Ok(ret);
+        });
+            
+        group.MapGet("/{id:int}", async (int id, IRepository<Contato> repository)
+            => await repository.GetByIdAsync(id) is Contato item ? Results.Ok(item) : Results.NotFound());
 
-            group.MapGet("/", async (FiapDbContext db) => 
+        group.MapPost("", async (Contato contato, IRepository<Contato> repository) =>
+        {
+            try
             {
-                //Teste.AdicionarDadosTeste(db);    
-                await db.Contatos.ToListAsync();
-            });
-
-            group.MapGet("/{id:int}", async (int id, FiapDbContext db) => await db.Contatos.FindAsync(id) is Contato item ? Results.Ok(item) : Results.NotFound());
-
-            group.MapPost("", async (Contato contato, FiapDbContext db) =>
+                await repository.AddAsync(contato);
+                return Results.Created($"{baseUrl}/{contato.Id}", contato);
+            }
+            catch (Exception ex)
             {
-                try
-                {
-                    db.Contatos.Add(contato);
-                    await db.SaveChangesAsync();
-                    return Results.Created($"{baseUrl}/{contato.Id}", contato);
-                }
-                catch (Exception ex)
-                {
-                    //throw;
-                    return Results.BadRequest();
-                }
+                //throw;
+                return Results.BadRequest();
+            }
 
-            });
+        });
 
-            group.MapPut("/{id:int}", async (int id, Contato contato, FiapDbContext db) =>
+        group.MapPut("/{id:int}", async (int id, Contato contato, IRepository<Contato> repository) =>
+        {
+            try
             {
-                try
-                {
-                    var existItem = await db.Contatos.FindAsync(id);
-                    if (existItem is null) return Results.NotFound();
+                Contato currentContato = await repository.GetByIdWithTrackingAsync(id, r => r.Telefones);
+                if (currentContato is null) return Results.NotFound();
 
-                    existItem.Nome = contato.Nome;
-                    existItem.Telefone.DDD = contato.Telefone.DDD;
-                    existItem.Telefone.Numero = contato.Telefone.Numero;
-                    existItem.Email = contato.Email;
-                    await db.SaveChangesAsync();
-                    return Results.NoContent();
-                }
-                catch (Exception ex)
-                {
-                    //throw;
-                    return Results.BadRequest();
-                }
-            });
+                currentContato.Nome = contato.Nome;
+                currentContato.Email = contato.Email;
+                currentContato.Telefones = contato.Telefones?.ToList();
 
-            group.MapDelete("/{id:int}", async (int id, FiapDbContext db) =>
+                var ret = await repository.UpdateAsync(currentContato);
+                return Results.Ok($"{ret} Registro(s) atualizado(s) com sucesso!");
+            }
+            catch (Exception ex)
             {
-                try
-                {
-                    if (await db.Contatos.FindAsync(id) is Contato contato)
-                    {
-                        db.Contatos.Remove(contato);
-                        await db.SaveChangesAsync();
-                        return Results.NoContent();
-                    }
-                    return Results.NotFound();
-                }
-                catch (Exception ex)
-                {
-                    //throw;
-                    return Results.BadRequest();
-                }
-            });
+                //throw;
+                return Results.BadRequest("Erro na atualização do registro!");
+            }
+        });
 
-
-            /*
-            app.MapGet("/", async context =>
+        group.MapDelete("/{id:int}", async (int id, IRepository<Contato> repository) =>
+        {
+            try
             {
-                // Get all todo items
-                await context.Response.WriteAsJsonAsync(new { Message = "All todo items" });
-            });
-
-            app.MapGet("/{id}", async context =>
+                if (await repository.GetByIdAsync(id) is Contato contato)
+                {
+                    int ret = await repository.DeleteAsync(contato);
+                    return Results.Ok($"{ret} Registro(s) excluído(s) com sucesso!");
+                }
+                return Results.NotFound();
+            }
+            catch (Exception ex)
             {
-                // Get one todo item
-                await context.Response.WriteAsJsonAsync(new { Message = "One todo item" });
-            });
-            */
-        }
+                //throw;
+                return Results.BadRequest();
+            }
+        });
 
     }
 
+}
 
-    public static class Teste
+
+public static class Teste
+{
+    public static void AdicionarDadosTeste(IRepository<Contato> repository)
     {
-        public static void AdicionarDadosTeste(FiapDbContext context)
+        var ret = repository.GetAllAsync().Result;
+        if (ret.Count() > 0) return;
+
+        var testeContato1 = new Contato
         {
-            if (context.Contatos.Count() > 0) return;
+            Id = 123456,
+            Nome = "Teste",
+            Email = "teste@gmail.com",
+            Telefones = new List<Telefone>() { new Telefone { DDD = "11", Numero = "982598878" } }
+        };
 
-            var testeContato1 = new Contato
-            {
-                Id = 123456,
-                Nome = "Teste",
-                Email = "teste@gmail.com",
-                Telefone = new Telefone { DDD = "11", Numero = "981498979" }
-            };
-            context.Contatos.Add(testeContato1);
-
-            context.SaveChanges();
-        }
+        repository.Add(testeContato1);
     }
-
-
 }
 
