@@ -49,6 +49,7 @@ namespace TechChallengeFIAP.Infrastructure.Repositories
                 throw new InvalidOperationException($"Contatos com o DDD: {(DDD is null ? "nulo" : DDD)} não encontrado.");
 
             return contatos;
+
         }
 
         public async Task UpdateAsync(Contato contato)
