@@ -7,3 +7,5 @@ https://dotnet.microsoft.com/pt-br/apps/aspnet/apis
 Minimal API com ASP.NET Core .NET 6
 https://rodolfofadino.com.br/minimal-api-com-asp-net-core-net-6-cf0633b8b3db
 
+Materiais de apoio para a disciplina de Desenvolvimento de APIs com .NET 8 para a PÓS TECH da Fiap.
+https://github.com/dodouglas12/Fiap-DesenvDotNet8
