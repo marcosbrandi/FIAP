@@ -12,6 +12,7 @@ namespace TechChallengeFIAP.Infrastructure.Repositories
         public ContatoRepository(FiapDbContext dBContext)
         {
             _dbContext = dBContext;
+
         }
 
         public async Task<Contato> AddAsync(Contato contato)
