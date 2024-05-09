@@ -7,9 +7,9 @@ using TechChallengeFIAP.Infrastracture.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = "Data Source=fiap.db";
+//var connectionString = "Data Source=fiap.db";
 
-builder.Services.AddSqlite<FiapDbContext>(connectionString);
+//builder.Services.AddSqlite<FiapDbContext>(connectionString);
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(c =>
