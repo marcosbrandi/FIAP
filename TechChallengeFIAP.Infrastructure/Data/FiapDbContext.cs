@@ -18,14 +18,19 @@ namespace TechChallengeFIAP.Infrastracture.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            /*
             modelBuilder.Entity<Contato>()
                 .HasMany(e => e.Telefones)
                 .WithOne()
                 .HasForeignKey("ContatoId")
                 .IsRequired();
-            
-            base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<Contato>()
+                .Navigation(e => e.Telefones)
+                .AutoInclude();
+
+            base.OnModelCreating(modelBuilder);
+            */
         }
 
     }
