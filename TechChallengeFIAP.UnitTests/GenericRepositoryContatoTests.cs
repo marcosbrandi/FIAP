@@ -62,7 +62,7 @@ namespace TechChallengeFIAP.Testes
         public async Task ExcluirEntidade_DeveExcluirDoBancoDeDados()
         {
             // Arrange
-            var telefone = new Telefone { DDD = "12", Numero = "987745896" };
+            var telefone = new Telefone { DDD = "11", Numero = "999852244" };
             var entity = new Contato { Nome = "Gustavo", Email = "gustavo@fiap.com", Telefone = telefone };
             await _contatoRepository.AddAsync(entity);
 
@@ -70,9 +70,10 @@ namespace TechChallengeFIAP.Testes
             await _contatoRepository.DeleteAsync(entity);
 
             // Assert
-            var contatoExcluido = await _contatoRepository.FindAsync(entity.Id);
-            Assert.IsNull(contatoExcluido);
+            var contatos = await _contatoRepository.GetAllAsync(null);
+            Assert.IsFalse(contatos.Any(c => c.Nome == "Gustavo"));
         }
+
 
         [Test]
         public async Task ContarEntidades_DeveRetornarQuantidadeCorreta()
