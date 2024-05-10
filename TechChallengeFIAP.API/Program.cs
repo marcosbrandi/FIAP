@@ -12,7 +12,7 @@ builder.Services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title
 builder.Services.AddDbContext<FiapDbContext>( opt => opt.UseInMemoryDatabase(databaseName: "fiap") );
 
 // declara interfaces
-Interfaces.Add(builder.Services);
+ServiceInterfaces.Add(builder.Services);
 
 var app = builder.Build();
 
@@ -21,7 +21,7 @@ if (app.Environment.IsDevelopment()) { app.UseDeveloperExceptionPage(); }
 app.UseSwagger();
 
 // declara endpoints
-Endpoints.Set(app);
+AppEndpoints.Set(app);
 
 app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Contatos API V1"); });
 

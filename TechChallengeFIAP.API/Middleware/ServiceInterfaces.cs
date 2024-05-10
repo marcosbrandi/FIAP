@@ -4,7 +4,7 @@ using TechChallengeFIAP.Infrastructure.Repositories;
 
 namespace TechChallengeFIAP.API.Middleware;
 
-public static class Interfaces
+public static class ServiceInterfaces
 {
     public static void Add(IServiceCollection services)
     {

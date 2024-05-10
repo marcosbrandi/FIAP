@@ -2,7 +2,7 @@
 
 namespace TechChallengeFIAP.API.Middleware;
 
-public static class Endpoints
+public static class AppEndpoints
 {
     public static void Set(WebApplication app)
     {
