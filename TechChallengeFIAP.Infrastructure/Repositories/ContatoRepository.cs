@@ -27,7 +27,7 @@ namespace TechChallengeFIAP.Infrastructure.Repositories
 
         public async Task<Contato> FindAsync(int ID)
         {
-            var contato = await fiapContext.Contatos.FindAsync(ID);
+            var contato = await fiapContext.Contatos.Include(x => x.Telefone).FirstOrDefaultAsync(x=> x.Id==ID); //  FindAsync(ID);
 
             if (contato == null)
                 throw new InvalidOperationException($"Contato com o Id: {ID} não encontrado.");
@@ -37,7 +37,7 @@ namespace TechChallengeFIAP.Infrastructure.Repositories
 
         public async Task<IEnumerable<Contato>> GetAllAsync(string? DDD)
         {
-            var contatos = await fiapContext.Contatos.Where(x => DDD == x.Telefone.DDD || DDD == null).ToListAsync();
+            var contatos = await fiapContext.Contatos.Include(x=> x.Telefone).Where(x => DDD == x.Telefone.DDD || DDD == null).ToListAsync();
 
             if (contatos == null || (contatos.Count == 0 && DDD is not null))
                 throw new InvalidOperationException($"Contatos com o DDD: {(DDD is null ? "nulo" : DDD)} não encontrado.");
