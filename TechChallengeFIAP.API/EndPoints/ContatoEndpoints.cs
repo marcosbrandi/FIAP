@@ -3,7 +3,7 @@ using TechChallengeFIAP.Core.Interfaces;
 
 namespace TechChallengeFIAP.API.EndPoints;
 
-public static class ContatosEndpoint
+public static class ContatoEndpoints
 {
     public static void Map(WebApplication app)
     {
