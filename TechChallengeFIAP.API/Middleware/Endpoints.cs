@@ -1,6 +1,6 @@
 ﻿using TechChallengeFIAP.API.EndPoints;
 
-namespace TechChallengeFIAP.API;
+namespace TechChallengeFIAP.API.Middleware;
 
 public static class Endpoints
 {

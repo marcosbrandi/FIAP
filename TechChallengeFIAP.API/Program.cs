@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using TechChallengeFIAP.API;
+using TechChallengeFIAP.API.Middleware;
 using TechChallengeFIAP.Infrastracture.Data;
 
 var builder = WebApplication.CreateBuilder(args);

@@ -2,7 +2,7 @@
 using TechChallengeFIAP.Core.Interfaces;
 using TechChallengeFIAP.Infrastructure.Repositories;
 
-namespace TechChallengeFIAP.API;
+namespace TechChallengeFIAP.API.Middleware;
 
 public static class Interfaces
 {
