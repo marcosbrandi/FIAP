@@ -5,6 +5,12 @@ namespace TechChallengeFIAP.API.EndPoints;
 
 public static class ContatoEndpoints
 {
+    /// <summary>
+    /// Método responsável por mapear todas as operações realizadas pela entidade Contato.
+    /// Necessário receber uma instância de WebApplication para execução das operações CRUD da entidade
+    /// </summary>
+    /// <param name="app"></param>
+    /// <exception cref="InvalidOperationException"></exception>
     public static void Map(WebApplication app)
     {
         const string baseUrl = @"/v1/contatos";
@@ -35,8 +41,16 @@ public static class ContatoEndpoints
         
         group.MapPost("", async (Contato contato, IContatoRepository repository) =>
         {
-            await repository.AddAsync(contato);
-            return Results.Created($"{baseUrl}/{contato.Id}", contato);
+            try
+            {
+                await repository.AddAsync(contato);
+                return Results.Created($"{baseUrl}/{contato.Id}", contato);
+            }
+            catch (Exception ex)
+            {
+                return Results.BadRequest(ex.Message);
+                throw;
+            }
         });
 
         group.MapPut("/{id:int}", async (int id, Contato contato, IContatoRepository repository) =>
