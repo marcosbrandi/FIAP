@@ -5,9 +5,17 @@ VisualStudioVersion = 17.5.002.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechChallengeFIAP.API", "TechChallengeFIAP.API\TechChallengeFIAP.API.csproj", "{679CAB86-A9EC-4469-9CE7-0F486752A737}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechChallengeFIAP.Core", "TechChallengeFIAP.Core\TechChallengeFIAP.Core.csproj", "{331EB39C-7D9E-43F7-BE01-E1A9465810C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechChallengeFIAP.Core", "TechChallengeFIAP.Core\TechChallengeFIAP.Core.csproj", "{331EB39C-7D9E-43F7-BE01-E1A9465810C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechChallengeFIAP.Infrastructure", "TechChallengeFIAP.Infrastructure\TechChallengeFIAP.Infrastructure.csproj", "{EDC61955-1FA2-437B-82BF-497B4E4BCBC9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechChallengeFIAP.Infrastructure", "TechChallengeFIAP.Infrastructure\TechChallengeFIAP.Infrastructure.csproj", "{EDC61955-1FA2-437B-82BF-497B4E4BCBC9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BF76ED7B-929B-49D7-B536-19F374848AE4}"
+	ProjectSection(SolutionItems) = preProject
+		Info.txt = Info.txt
+		links.txt = links.txt
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechChallengeFIAP.UnitTests", "TechChallengeFIAP.UnitTests\TechChallengeFIAP.UnitTests.csproj", "{66E3C310-7A5E-4C01-B048-CF9389EB9B84}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +35,10 @@ Global
 		{EDC61955-1FA2-437B-82BF-497B4E4BCBC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EDC61955-1FA2-437B-82BF-497B4E4BCBC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EDC61955-1FA2-437B-82BF-497B4E4BCBC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66E3C310-7A5E-4C01-B048-CF9389EB9B84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66E3C310-7A5E-4C01-B048-CF9389EB9B84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66E3C310-7A5E-4C01-B048-CF9389EB9B84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66E3C310-7A5E-4C01-B048-CF9389EB9B84}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
