@@ -1,0 +1,10 @@
+{
+  "id": 2,
+  "nome": "teste gustavo",
+  "email": "testeemail22@example.com",
+  "telefone": {
+    "id": 22,
+    "ddd": "11",
+    "numero": "123456799"
+  }
+}
