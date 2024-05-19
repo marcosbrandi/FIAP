@@ -33,7 +33,7 @@ public static class ContatoEndpoints
         {
             var contatos = await repository.GetAllAsync(DDD);
             if (contatos == null || contatos.Count() == 0)
-                Results.NotFound($"Contatos com o DDD: {(DDD is null ? "nulo" : DDD)} não encontrado.");
+               return Results.NotFound($"Contatos com o DDD: {(DDD is null ? "nulo" : DDD)} não encontrado.");
            
             return Results.Ok(contatos);
         });

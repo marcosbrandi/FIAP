@@ -36,12 +36,7 @@ namespace TechChallengeFIAP.Infrastructure.Repositories
         public async Task DeleteAsync(Contato contato)
         {
             var contatoDelete = await FindAsync(contato.Id);
-
-            if (contatoDelete is null)
-                throw new WarningException("Contato não foi encontrado");
-
-                fiapContext.Contatos.Remove(contatoDelete);
-
+            fiapContext.Contatos.Remove(contatoDelete);
             await fiapContext.SaveChangesAsync();
         }
 
@@ -54,12 +49,7 @@ namespace TechChallengeFIAP.Infrastructure.Repositories
         /// <exception cref="InvalidOperationException"></exception>
         public async Task<Contato> FindAsync(int ID)
         {
-            var contato = await fiapContext.Contatos.Include(x => x.Telefone).FirstOrDefaultAsync(x=> x.Id==ID); //  FindAsync(ID);
-            //var contato = await fiapContext.Telefones.Where(x => DDD == x.DDD || DDD == null).Select(a => a.Contato).ToListAsync();
-
-            if (contato == null)
-                throw new WarningException($"Contato com o Id: {ID} não encontrado.");
-
+            var contato = await fiapContext.Contatos.Include(x => x.Telefone).FirstOrDefaultAsync(x=> x.Id==ID);
             return contato;
         }
 
@@ -75,8 +65,6 @@ namespace TechChallengeFIAP.Infrastructure.Repositories
             if (contatos > 0)
             {
                 var emailChecker = fiapContext.Contatos.Where(c => c.Email == contato.Email);
-
-
                 if(emailChecker.Any())
                 throw new WarningException($"O email inserido já está cadastrado");
             }
@@ -92,13 +80,7 @@ namespace TechChallengeFIAP.Infrastructure.Repositories
         public async Task<IEnumerable<Contato>> GetAllAsync(string? DDD)
         {
             var contatos = await fiapContext.Contatos.Include(x=> x.Telefone).Where(x => DDD == x.Telefone.DDD || DDD == null).ToListAsync();
-            //var contatos = await fiapContext.Telefones.Where(x => DDD == x.DDD || DDD == null).Select(a=>a.Contato).ToListAsync();
-
-            if (contatos == null || (contatos.Count == 0 && DDD is not null))
-                throw new InvalidOperationException($"Contatos com o DDD: {(DDD is null ? "nulo" : DDD)} não encontrado.");
-
             return contatos;
-
         }
 
         /// <summary>
