@@ -19,18 +19,23 @@ namespace TechChallengeFIAP.Infrastracture.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             /*
-            modelBuilder.Entity<Contato>()
-                .HasMany(e => e.Telefones)
-                .WithOne()
-                .HasForeignKey("ContatoId")
+            modelBuilder.Entity<Telefone>()
+                .HasOne(e => e.Contato)
+                .WithMany(e => e.Telefones)
+                .OnDelete(DeleteBehavior.NoAction)
                 .IsRequired();
 
             modelBuilder.Entity<Contato>()
                 .Navigation(e => e.Telefones)
                 .AutoInclude();
-
-            base.OnModelCreating(modelBuilder);
             */
+            /*
+            modelBuilder.Entity<Contato>()
+                .HasOne(a => a.Telefone)
+                .WithOne(b => b.Contato)
+                .HasForeignKey<Telefone>(b => b.TelefoneCompleto);
+            */
+            //base.OnModelCreating(modelBuilder);
         }
 
     }

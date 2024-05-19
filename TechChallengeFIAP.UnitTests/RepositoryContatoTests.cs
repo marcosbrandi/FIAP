@@ -7,9 +7,8 @@ using TechChallengeFIAP.Infrastructure.Repositories;
 namespace TechChallengeFIAP.Testes
 {
     [TestFixture]
-    public class GenericRepositoryContatoTestes
+    public class RepositoryContatoTestes
     {
-        //private IGenericRepository<Contato> _contatoRepository;
         private IContatoRepository _contatoRepository;
 
         [SetUp]
@@ -21,7 +20,6 @@ namespace TechChallengeFIAP.Testes
 
             var dbContext = new FiapDbContext(options);
 
-            //_contatoRepository = new GenericRepository<Contato>(dbContext);
             _contatoRepository = new ContatoRepository(dbContext);
         }
 
@@ -29,8 +27,8 @@ namespace TechChallengeFIAP.Testes
         public async Task AdicionarEntidade_DeveAdicionarNoBancoDeDados()
         {
             // Arrange
-            var telefone = new Telefone { DDD = "19", Numero = "999645350" };
-            var entity = new Contato { Nome = "Julio", Email = "julio@fiap.com", Telefone = telefone };
+            var entity = new Contato { Nome = "Julio", Email = "julio@fiap.com", Telefone = 
+                new Telefone { DDD = "19", Numero = "999645350" } };
 
             // Act
             await _contatoRepository.AddAsync(entity);
@@ -44,8 +42,10 @@ namespace TechChallengeFIAP.Testes
         public async Task AtualizarEntidade_DeveAtualizarNoBancoDeDados()
         {
             // Arrange
-            var telefone = new Telefone { DDD = "11", Numero = "999852244" };
-            var entity = new Contato { Nome = "Valterlei", Email = "valterlei@fiap.com", Telefone = telefone };
+            var entity = new Contato { Nome = "Valterlei", Email = "valterlei@fiap.com", 
+                Telefone = new Telefone { DDD = "11", Numero = "999852244" }
+            };
+
             await _contatoRepository.AddAsync(entity);
 
             entity.Email = "novoemail@fiap.com";
@@ -62,12 +62,16 @@ namespace TechChallengeFIAP.Testes
         public async Task ExcluirEntidade_DeveExcluirDoBancoDeDados()
         {
             // Arrange
-            var telefone = new Telefone { DDD = "11", Numero = "999852244" };
-            var entity = new Contato { Nome = "Gustavo", Email = "gustavo@fiap.com", Telefone = telefone };
-            await _contatoRepository.AddAsync(entity);
+            var contato = new Contato
+            {
+                Nome = "Gustavo",
+                Email = "gustavo@fiap.com",
+                Telefone = new Telefone { DDD = "11", Numero = "999852244" }
+            };
+            await _contatoRepository.AddAsync(contato);
 
             // Act
-            await _contatoRepository.DeleteAsync(entity);
+            await _contatoRepository.DeleteAsync(contato);
 
             // Assert
             var contatos = await _contatoRepository.GetAllAsync(null);
@@ -79,10 +83,19 @@ namespace TechChallengeFIAP.Testes
         public async Task ContarEntidades_DeveRetornarQuantidadeCorreta()
         {
             // Arrange
-            var telefone1 = new Telefone { DDD = "19", Numero = "998742233" };
-            var contato1 = new Contato { Nome = "Marcos", Email = "marcos@fiap.com", Telefone = telefone1 };
-            var telefone2 = new Telefone { DDD = "15", Numero = "999874412" };
-            var contato2 = new Contato { Nome = "Jhonas", Email = "jhonas@fiap.com", Telefone = telefone2 };
+            var contato1 = new Contato
+            {
+                Nome = "Marcos",
+                Email = "marcos@fiap.com",
+                Telefone = new Telefone { DDD = "19", Numero = "998742233" }
+            };
+
+            var contato2 = new Contato
+            {
+                Nome = "Jhonas",
+                Email = "jhonas@fiap.com",
+                Telefone = new Telefone { DDD = "15", Numero = "999874412" }
+            };
 
             await _contatoRepository.AddAsync(contato1);
             await _contatoRepository.AddAsync(contato2);

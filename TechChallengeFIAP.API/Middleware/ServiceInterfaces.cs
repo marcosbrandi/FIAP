@@ -8,7 +8,6 @@ public static class ServiceInterfaces
 {
     public static void Add(IServiceCollection services)
     {
-        //services.AddTransient<IRepository<Contato>, Repository<Contato>>();
         services.AddTransient<IContatoRepository, ContatoRepository>();
 
 

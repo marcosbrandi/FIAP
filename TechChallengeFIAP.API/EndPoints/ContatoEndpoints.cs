@@ -20,7 +20,7 @@ public static class ContatoEndpoints
         group.MapGet("/", async (IContatoRepository repository) =>
         {
             if (await repository.CountAsync() == 0)
-                Teste.AdicionarDadosTeste(repository);
+                SeedTest.Add(repository);
 
             var ret = await repository.GetAllAsync(null);
             return Results.Ok(ret);
@@ -32,39 +32,30 @@ public static class ContatoEndpoints
         group.MapGet("/Search", async (string? DDD, IContatoRepository repository) =>
         {
             var contatos = await repository.GetAllAsync(DDD);
-
             if (contatos == null || contatos.Count() == 0)
-                throw new InvalidOperationException($"Contatos com o DDD: {(DDD is null ? "nulo" : DDD)} não encontrado.");
-            
-            return contatos;
+                Results.NotFound($"Contatos com o DDD: {(DDD is null ? "nulo" : DDD)} não encontrado.");
+           
+            return Results.Ok(contatos);
         });
         
         group.MapPost("", async (Contato contato, IContatoRepository repository) =>
         {
-            try
-            {
-                await repository.AddAsync(contato);
-                return Results.Created($"{baseUrl}/{contato.Id}", contato);
-            }
-            catch (Exception ex)
-            {
-                return Results.BadRequest(ex.Message);
-                throw;
-            }
+            await repository.AddAsync(contato);
+            return Results.Created($"{baseUrl}/{contato.Id}", contato);
         });
 
         group.MapPut("/{id:int}", async (int id, Contato contato, IContatoRepository repository) =>
         {
-            Contato? currentContato = await repository.FindAsync(id);
-            if (currentContato is null) return Results.NotFound();
+            if (await repository.FindAsync(id) is Contato currentContato)
+            {
+                currentContato.Nome = contato.Nome;
+                currentContato.Email = contato.Email;
+                currentContato.Telefone = contato.Telefone;
 
-            currentContato.Nome = contato.Nome;
-            currentContato.Email = contato.Email;
-            currentContato.Telefone.DDD = contato.Telefone.DDD;
-            currentContato.Telefone.Numero = contato.Telefone.Numero;
-
-            await repository.UpdateAsync(currentContato);
-            return Results.Ok($"Registro(s) atualizado(s) com sucesso!");
+                await repository.UpdateAsync(currentContato);
+                return Results.Ok($"Registro(s) atualizado(s) com sucesso!");
+            }
+            return Results.NotFound();
         });
 
         group.MapDelete("/{id:int}", async (int id, IContatoRepository repository) =>
@@ -82,21 +73,5 @@ public static class ContatoEndpoints
 }
 
 
-public static class Teste
-{
-    public static void AdicionarDadosTeste(IContatoRepository repository)
-    {
-        var ret = repository.GetAllAsync(null).Result;
-        if (ret.Count() > 0) return;
 
-        var testeContato1 = new Contato
-        {
-            Id = 123456,
-            Nome = "Teste",
-            Email = "teste@gmail.com",
-            Telefone = new Telefone { DDD = "11", Numero = "982598878" }
-        };
-        repository.AddAsync(testeContato1);
-    }
-}
 
