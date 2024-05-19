@@ -44,13 +44,14 @@ public static class ContatoEndpoints
             return Results.Created($"{baseUrl}/{contato.Id}", contato);
         });
 
-        group.MapPut("/{id:int}", async (int id, Contato contato, IContatoRepository repository) =>
+        group.MapPut("", async (Contato contato, IContatoRepository repository) =>
         {
-            if (await repository.FindAsync(id) is Contato currentContato)
+            if (await repository.FindAsync(contato.Id) is Contato currentContato)
             {
                 currentContato.Nome = contato.Nome;
                 currentContato.Email = contato.Email;
-                currentContato.Telefone = contato.Telefone;
+                currentContato.Telefone.DDD = contato.Telefone.DDD;
+                currentContato.Telefone.Numero = contato.Telefone.Numero;
 
                 await repository.UpdateAsync(currentContato);
                 return Results.Ok($"Registro(s) atualizado(s) com sucesso!");
