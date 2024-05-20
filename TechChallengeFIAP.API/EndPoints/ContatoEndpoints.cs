@@ -30,7 +30,12 @@ public static class ContatoEndpoints
         group.MapGet("/{id:int}", async (int id, IContatoRepository repository)
             => await repository.FindAsync(id) is Contato item ? Results.Ok(item) : Results.NotFound($"Contato ID {id} não localizado."));
 
-        //Criar metodo para retornar contato pelo nome
+        /// <summary>
+        /// Retorna um contato pelo nome
+        /// </summary>
+        /// <param nome="nome"></param>
+        /// <returns></returns>
+        /// <exception cref="WarningException"></exception>
         group.MapGet("/Search/Name", async (string nome, IContatoRepository repository)
             => await repository.GetByNameAsync(nome) is Contato item ? Results.Ok(item) : Results.NotFound($"Contato {nome} não localizado."));
 

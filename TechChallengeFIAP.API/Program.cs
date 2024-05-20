@@ -2,12 +2,24 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using TechChallengeFIAP.API.Middleware;
 using TechChallengeFIAP.Infrastracture.Data;
+using Swashbuckle.AspNetCore.Swagger;
+using System.Reflection;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "Contatos API", Description = "Cadastro de Contatos", Version = "v1" }); });
+builder.Services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { 
+    Title = "Contatos API", Description = "Cadastro de Contatos", Version = "v1" });
+
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+
+    c.IncludeXmlComments(xmlPath);
+});
+
 
 builder.Services.AddDbContext<FiapDbContext>( opt => opt.UseInMemoryDatabase(databaseName: "fiap") );
 
