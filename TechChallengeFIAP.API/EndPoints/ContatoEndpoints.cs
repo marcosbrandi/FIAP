@@ -25,10 +25,16 @@ public static class ContatoEndpoints
             var ret = await repository.GetAllAsync(null);
             return Results.Ok(ret);
         });
-            
+
+        // Retorna um contato pelo ID
         group.MapGet("/{id:int}", async (int id, IContatoRepository repository)
             => await repository.FindAsync(id) is Contato item ? Results.Ok(item) : Results.NotFound($"Contato ID {id} não localizado."));
 
+        //Criar metodo para retornar contato pelo nome
+        group.MapGet("/Search/Name", async (string nome, IContatoRepository repository)
+            => await repository.GetByNameAsync(nome) is Contato item ? Results.Ok(item) : Results.NotFound($"Contato {nome} não localizado."));
+
+        // Retorna um contato pelo DDD
         group.MapGet("/Search", async (string? DDD, IContatoRepository repository) =>
         {
             var contatos = await repository.GetAllAsync(DDD);
@@ -37,13 +43,15 @@ public static class ContatoEndpoints
            
             return Results.Ok(contatos);
         });
-        
+
+        // Adiciona um novo contato
         group.MapPost("", async (Contato contato, IContatoRepository repository) =>
         {
             await repository.AddAsync(contato);
             return Results.Created($"{baseUrl}/{contato.Id}", contato);
         });
 
+        // Atualiza um contato
         group.MapPut("", async (Contato contato, IContatoRepository repository) =>
         {
             if (await repository.FindAsync(contato.Id) is Contato currentContato)
@@ -59,6 +67,7 @@ public static class ContatoEndpoints
             return Results.NotFound();
         });
 
+        // Deleta um contato
         group.MapDelete("/{id:int}", async (int id, IContatoRepository repository) =>
         {
             if (await repository.FindAsync(id) is Contato contato)
@@ -68,6 +77,18 @@ public static class ContatoEndpoints
             }
             return Results.NotFound();
         });
+
+        // Retorna informações sobre o DDD
+        group.MapGet("/DDD/{DDD}", async (string DDD, IContatoRepository repository) =>
+        {
+            var contatos = await repository.GetAllAsync(DDD);
+            if (contatos == null || contatos.Count() == 0)
+                return Results.NotFound($"Contatos com o DDD: {DDD} não encontrado.");
+            return Results.Ok(contatos);
+        });
+
+
+
 
     }
 

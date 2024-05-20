@@ -8,6 +8,11 @@
             public List<string> cities { get; set; }
         }
 
+        /// <summary>
+        /// Método que retorna informações da região sobre o DDD inserido
+        /// </summary>
+        /// <param name="DDD"></param>
+        /// <returns></returns>
         public static DDDInfo GetInfo(string DDD)
         {
             var client = new HttpClient();

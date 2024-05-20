@@ -42,7 +42,7 @@ namespace TechChallengeFIAP.Infrastructure.Repositories
 
 
         /// <summary>
-        /// Busca e retorna um contato pelo seu registro no banco, recebendo um id
+        /// Busca e retorna um contato pelo seu id no banco, recebendo um id
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
@@ -51,6 +51,25 @@ namespace TechChallengeFIAP.Infrastructure.Repositories
         {
             var contato = await fiapContext.Contatos.Include(x => x.Telefone).FirstOrDefaultAsync(x=> x.Id==ID);
             return contato;
+        }
+
+
+        /// <summary>
+        /// Retorna um contato pelo nome
+        /// </summary>
+        /// <param nome="nome"></param>
+        /// <returns></returns>
+        /// <exception cref="WarningException"></exception>
+        public async Task<Contato> GetByNameAsync(string nome)
+        {
+            var contato = fiapContext.Contatos
+                                     .Include(x => x.Telefone)
+                                     .Where(x => x.Nome == nome)
+                                     .FirstOrDefault();
+
+            if (contato != null)
+                return contato;
+            throw new WarningException($"Contato com este nome não encontrado");
         }
 
         /// <summary>

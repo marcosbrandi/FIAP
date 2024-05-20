@@ -10,6 +10,7 @@ namespace TechChallengeFIAP.Core.Interfaces
         public Task<IEnumerable<Contato>> GetAllAsync(string? DDD);
         public Task<Contato> FindAsync(int ID);
         public Task<int> CountAsync();
+        public Task<Contato> GetByNameAsync(string nome);
 
     }
 }
