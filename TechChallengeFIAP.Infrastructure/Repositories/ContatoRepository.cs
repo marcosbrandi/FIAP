@@ -107,9 +107,14 @@ namespace TechChallengeFIAP.Infrastructure.Repositories
         /// </summary>
         /// <param name="contato"></param>
         /// <returns></returns>
-        public async Task UpdateAsync(Contato contato)
+        public async Task UpdateAsync(Contato currentContato,Contato updatedContato)
         {
-            fiapContext.Update(contato);
+            currentContato.Nome = updatedContato.Nome;
+            currentContato.Email = updatedContato.Email;
+            currentContato.Telefone.DDD = updatedContato.Telefone.DDD;
+            currentContato.Telefone.Numero = updatedContato.Telefone.Numero;
+            
+            fiapContext.Update(currentContato);
             await fiapContext.SaveChangesAsync();
         }
 

@@ -48,7 +48,8 @@ app.MapGet($"/Buscar/Nome", async (string nome, IContatoRepository repository)
 
 // Retorna um contato pelo ID
 app.MapGet("/Buscar/Id", async (int id, IContatoRepository repository)
-    => await repository.FindAsync(id) is Contato item ? Results.Ok(item) : Results.NotFound($"Contato ID {id} não localizado.")).WithMetadata(new SwaggerOperationAttribute("summary001", "description001"));
+    => await repository.FindAsync(id) is Contato item ? Results.Ok(item) : Results.NotFound($"Contato ID {id} não localizado.")).
+       WithMetadata(new SwaggerOperationAttribute($@"Retorna um contato passando Id de registro como parâmetro", "description001"));
 
 // Retorna um contato pelo DDD
 app.MapGet("/Buscar/DDD", async (string? DDD, IContatoRepository repository) =>
@@ -58,7 +59,7 @@ app.MapGet("/Buscar/DDD", async (string? DDD, IContatoRepository repository) =>
         return Results.NotFound($"Contatos com o DDD: {(DDD is null ? "nulo" : DDD)} não encontrado.");
 
     return Results.Ok(contatos);
-});
+}).WithMetadata(new SwaggerOperationAttribute("Retorna todos os contatos correspondentes ao DDD recebido como parâmetro"));
 
 // Retorna informações sobre o DDD
 app.MapGet("/Buscar/UfPorDDD", async (string DDD, IContatoRepository repository) =>
@@ -67,30 +68,28 @@ app.MapGet("/Buscar/UfPorDDD", async (string DDD, IContatoRepository repository)
     if (contatos == null || contatos.Count() == 0)
         return Results.NotFound($"Contatos com o DDD: {DDD} não encontrado.");
     return Results.Ok(contatos);
-});
+}).WithMetadata(new SwaggerOperationAttribute("Retorna o estado correspondente ao DDD recebido como parâmetro"));
 
 // Adiciona um novo contato
 app.MapPost("Inserir/Contato", async (Contato contato, IContatoRepository repository) =>
 {
     await repository.AddAsync(contato);
     return Results.Created($"{baseUrl}/{contato.Id}", contato);
-});
+}).WithMetadata(new SwaggerOperationAttribute($"Cria um novo contato, os parâmetros devem corresponder ao body do json, há validações para Id e E-mail repetido"));
 
 // Atualiza um contato
-app.MapPut("Atualizar/Contato", async (Contato contato, IContatoRepository repository) =>
+app.MapPut("Atualizar/Contato", async (int id,Contato contato, IContatoRepository repository) =>
 {
-    if (await repository.FindAsync(contato.Id) is Contato currentContato)
+    Contato currentContato = await repository.FindAsync(id);
+    if (currentContato != null)
     {
-        currentContato.Nome = contato.Nome;
-        currentContato.Email = contato.Email;
-        currentContato.Telefone.DDD = contato.Telefone.DDD;
-        currentContato.Telefone.Numero = contato.Telefone.Numero;
-
-        await repository.UpdateAsync(currentContato);
-        return Results.Ok($"Registro(s) atualizado(s) com sucesso!");
+    await repository.UpdateAsync(currentContato,contato);
+    return Results.Ok($"Registro(s) atualizado(s) com sucesso!");
     }
-    return Results.NotFound();
-});
+    
+    return Results.NotFound($"Contato ID {id} não localizado.");
+
+}).WithMetadata(new SwaggerOperationAttribute("Atualiza um contato"));
 
 // Deleta um contato
 app.MapDelete("Deletar/Contato", async (int id, IContatoRepository repository) =>
@@ -101,9 +100,7 @@ app.MapDelete("Deletar/Contato", async (int id, IContatoRepository repository) =
         return Results.Ok($"Registro excluído com sucesso!");
     }
     return Results.NotFound();
-});
-
-
+}).WithMetadata(new SwaggerOperationAttribute("Deleta um contato correspondente ao Id recebido como parâmetro"));
 
 app.Run();
 
