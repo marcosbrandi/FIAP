@@ -14,17 +14,18 @@
 
 # Índice 
 
-<!--* [Título e Imagem de capa](#Título-e-Imagem-de-capa)
-* [Badges](#badges)-->
+<!--* [Título e Imagem de capa](#Título-e-Imagem-de-capa)-->
+<!--* [Acesso ao Projeto](#acesso-ao-projeto)-->
+<!--* [Badges](#badges)-->
 <!--* [Status do Projeto](#status-do-Projeto)-->
+<!--* [Licença](#licença)-->
+<!--* [Conclusão](#conclusão)-->
+<!--* [Pessoas Contribuidoras](#pessoas-contribuidoras)-->
+
 * [Descrição do Projeto](#descrição-do-projeto)
 * [Funcionalidades e Demonstração da Aplicação](#funcionalidades-e-demonstração-da-aplicação)
-* [Acesso ao Projeto](#acesso-ao-projeto)
 * [Tecnologias utilizadas](#tecnologias-utilizadas)
-* [Pessoas Contribuidoras](#pessoas-contribuidoras)
-* [Pessoas Desenvolvedoras do Projeto](#pessoas-desenvolvedoras)
-* [Licença](#licença)
-* [Conclusão](#conclusão)
+* [Pessoas Desenvolvedoras do Projeto](#pessoas-desenvolvedoras-do-projeto)
 
 <!--
 # Badges
@@ -50,8 +51,6 @@ formato de e-mail, telefone, campos obrigatórios).
   - Testes Unitários: desenvolver testes unitários utilizando xUnit ou NUnit.
 
 
-
-
 # Funcionalidades e Demonstração da Aplicação
 
 <!--
@@ -63,11 +62,42 @@ formato de e-mail, telefone, campos obrigatórios).
 - `Domain Story Telling`: 
 <img loading="lazy" width="50%" height="50%" src="https://github.com/marcosbrandi/FIAP/blob/master/Docs/Domain%20Storytelling/Domain%20Story%20Telling.jpg"/>
 
-- `Funcionalidade 1`: descrição da funcionalidade 1
-- `Funcionalidade 2`: descrição da funcionalidade 2
-- `Funcionalidade 2a`: descrição da funcionalidade 2a relacionada à funcionalidade 2
-- `Funcionalidade 3`: descrição da funcionalidade 3
+- `Schemas`: 
+<img loading="lazy" width="40%" height="40%" src="https://github.com/marcosbrandi/FIAP/blob/master/Docs/Domain%20Storytelling/Schemas.PNG"/>
 
-* [Índice](#índice)
+- `Endpoints`: 
+<img loading="lazy" width="100%" height="100%" src="https://github.com/marcosbrandi/FIAP/blob/master/Docs/Domain%20Storytelling/Endpoints.PNG"/>
 
-- 
+
+- `Consulta por Nome`: Retorna um contato passando o Nome como parâmetro de busca
+- `Consulta por ID`: Retorna um contato passando Id de registro como parâmetro de busca
+- `Consulta por DDD`: Retorna os contatos correspondentes ao DDD recebido como parâmetro de busca
+    - Se o DDD nâo for informado, retorna todos os contatos cadastrados
+- `Consulta de UF por DDD`: Retorna a UF correspondente ao DDD recebido como parâmetro de busca
+- `Inserir Contato`: Cria um novo contato
+    - Os parâmetros devem corresponder ao body do json, há validações para Id e E-mail repetido
+- `Atualizar Contato`: Atualiza um contato existente
+    - Os parâmetros devem corresponder ao body do json, há validações para Id e E-mail repetido
+- `Deletar Contato`: Exclui um contato existente com i Id informado como parâmetro
+
+
+
+# Tecnologias utilizadas
+- C#, .Net 8, Minimal API, InMemory Database, EF Core 8, OpenAPI
+
+
+<!--# Pessoas Contribuidoras-->
+
+# Pessoas Desenvolvedoras do Projeto
+- Júlio Valle (juliodovale2012@gmail.com)
+- Gustavo Amaral (gustavo-amaral@hotmail.com)
+- Marcos Brandi Torres (marcosbrandi@hotmail.com)
+- Valterlei Viana (valterlei.viana@gmail.com)
+- Jhonas Nobre (jhonas_nobre@hotmail.com)
+
+<!--# Licença-->
+
+<!--# Conclusão-->
+
+<!--* [Índice](#índice)-->
+
