@@ -18,13 +18,14 @@
 <!--* [Acesso ao Projeto](#acesso-ao-projeto)-->
 <!--* [Badges](#badges)-->
 <!--* [Status do Projeto](#status-do-Projeto)-->
+<!--* [Licença](#licença)-->
+<!--* [Conclusão](#conclusão)-->
+<!--* [Pessoas Contribuidoras](#pessoas-contribuidoras)-->
+
 * [Descrição do Projeto](#descrição-do-projeto)
 * [Funcionalidades e Demonstração da Aplicação](#funcionalidades-e-demonstração-da-aplicação)
 * [Tecnologias utilizadas](#tecnologias-utilizadas)
-* [Pessoas Contribuidoras](#pessoas-contribuidoras)
 * [Pessoas Desenvolvedoras do Projeto](#pessoas-desenvolvedoras-do-projeto)
-* [Licença](#licença)
-* [Conclusão](#conclusão)
 
 <!--
 # Badges
@@ -94,9 +95,9 @@ formato de e-mail, telefone, campos obrigatórios).
 - Valterlei Viana (valterlei.viana@gmail.com)
 - Jhonas Nobre (jhonas_nobre@hotmail.com)
 
-# Licença
+<!--# Licença-->
 
-# Conclusão
+<!--# Conclusão-->
 
 
 
