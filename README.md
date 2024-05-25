@@ -22,7 +22,7 @@
 <!--* [Acesso ao Projeto](#acesso-ao-projeto)-->
 * [Tecnologias utilizadas](#tecnologias-utilizadas)
 * [Pessoas Contribuidoras](#pessoas-contribuidoras)
-* [Pessoas Desenvolvedoras do Projeto](#pessoas-desenvolvedoras)
+* [Pessoas Desenvolvedoras do Projeto](#pessoas-desenvolvedoras-do-projeto)
 * [Licença](#licença)
 * [Conclusão](#conclusão)
 
@@ -83,9 +83,9 @@ formato de e-mail, telefone, campos obrigatórios).
 
 # Tecnologias utilizadas
 
-# Pessoas Contribuidoras(#tecnologias-utilizadas)
+# Pessoas Contribuidoras
 
-# [Pessoas Desenvolvedoras do Projeto](#pessoas-desenvolvedoras)
+# [Pessoas Desenvolvedoras do Projeto]
 
 # [Licença](#licença)
 
