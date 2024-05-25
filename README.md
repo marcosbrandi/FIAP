@@ -14,12 +14,12 @@
 
 # Índice 
 
-<!--* [Título e Imagem de capa](#Título-e-Imagem-de-capa)
-* [Badges](#badges)-->
+<!--* [Título e Imagem de capa](#Título-e-Imagem-de-capa)-->
+<!--* [Acesso ao Projeto](#acesso-ao-projeto)-->
+<!--* [Badges](#badges)-->
 <!--* [Status do Projeto](#status-do-Projeto)-->
 * [Descrição do Projeto](#descrição-do-projeto)
 * [Funcionalidades e Demonstração da Aplicação](#funcionalidades-e-demonstração-da-aplicação)
-<!--* [Acesso ao Projeto](#acesso-ao-projeto)-->
 * [Tecnologias utilizadas](#tecnologias-utilizadas)
 * [Pessoas Contribuidoras](#pessoas-contribuidoras)
 * [Pessoas Desenvolvedoras do Projeto](#pessoas-desenvolvedoras-do-projeto)
