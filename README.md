@@ -82,14 +82,21 @@ formato de e-mail, telefone, campos obrigatórios).
 
 
 # Tecnologias utilizadas
+- C#, .Net 8, Minimal API, InMemory Database, EF Core 8, OpenAPI
 
-# Pessoas Contribuidoras
 
-# [Pessoas Desenvolvedoras do Projeto]
+<!--# Pessoas Contribuidoras-->
 
-# [Licença](#licença)
+# Pessoas Desenvolvedoras do Projeto
+- Júlio Valle (juliodovale2012@gmail.com)
+- Gustavo Amaral (gustavo-amaral@hotmail.com)
+- Marcos Brandi Torres (marcosbrandi@hotmail.com)
+- Valterlei Viana (valterlei.viana@gmail.com)
+- Jhonas Nobre (jhonas_nobre@hotmail.com)
 
-# [Conclusão](#conclusão)
+# Licença
+
+# Conclusão
 
 
 
