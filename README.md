@@ -63,6 +63,9 @@ formato de e-mail, telefone, campos obrigatórios).
 - `Domain Story Telling`: 
 <img loading="lazy" width="50%" height="50%" src="https://github.com/marcosbrandi/FIAP/blob/master/Docs/Domain%20Storytelling/Domain%20Story%20Telling.jpg"/>
 
+- `Schemas`: 
+<img loading="lazy" width="50%" height="50%" src="https://github.com/marcosbrandi/FIAP/blob/master/Docs/Domain%20Storytelling/Schemas.jpg"/>
+
 - `Funcionalidade 1`: descrição da funcionalidade 1
 - `Funcionalidade 2`: descrição da funcionalidade 2
 - `Funcionalidade 2a`: descrição da funcionalidade 2a relacionada à funcionalidade 2
