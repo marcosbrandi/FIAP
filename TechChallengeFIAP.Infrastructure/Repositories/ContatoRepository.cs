@@ -1,16 +1,26 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using TechChallengeFIAP.Core.Entities;
 using TechChallengeFIAP.Core.Interfaces;
 using TechChallengeFIAP.Infrastracture.Data;
 
 namespace TechChallengeFIAP.Infrastructure.Repositories
 {
-    public class ContatoRepository(FiapDbContext fiapContext) : IContatoRepository
+    public class ContatoRepository : IContatoRepository
     {
-        private readonly DbSet<Contato> db = fiapContext.Set<Contato>();
+        private FiapDbContext fiapContext;
+        private IDDDRegionService ddd_service;
+        public ContatoRepository(FiapDbContext _fiapContext, IDDDRegionService _ddd_service)
+        {
+            ddd_service = _ddd_service;
+            fiapContext = _fiapContext;
 
+            if (fiapContext.Contatos.Count() == 0)
+            {
+                SeedTest.Add(fiapContext, ddd_service);
+            }
+
+        }
         
         /// <summary>
         /// Registra um contato na base recebendo
@@ -22,7 +32,11 @@ namespace TechChallengeFIAP.Infrastructure.Repositories
         {
             bool emailregistrado = await CheckRegisteredEmail(contato);
             if (emailregistrado)
-            fiapContext.Add(contato);
+            {
+                var dddinfo = await ddd_service.GetInfo(contato.Telefone.DDD);
+                contato.Telefone.UF = dddinfo.state;
+                fiapContext.Add(contato);
+            }
             await fiapContext.SaveChangesAsync();
             return contato;
             
@@ -62,10 +76,10 @@ namespace TechChallengeFIAP.Infrastructure.Repositories
         /// <exception cref="WarningException"></exception>
         public async Task<Contato> GetByNameAsync(string nome)
         {
-            var contato = fiapContext.Contatos
+            var contato = await fiapContext.Contatos
                                      .Include(x => x.Telefone)
                                      .Where(x => x.Nome == nome)
-                                     .FirstOrDefault();
+                                     .FirstOrDefaultAsync();
 
             if (contato != null)
                 return contato;
@@ -73,9 +87,9 @@ namespace TechChallengeFIAP.Infrastructure.Repositories
         }
 
         /// <summary>
-        /// Checa se o e-mail inserido já foi cadastrado no sistema recebendo string email como parâmetro
+        /// Checa se o e-mail inserido já foi cadastrado no sistema recebendo o objeto contato como parâmetro
         /// </summary>
-        /// <param name="email"></param>
+        /// <param name="contato"></param>
         /// <returns></returns>
         /// <exception cref="WarningException"></exception>
         public async Task<bool> CheckRegisteredEmail(Contato contato)
@@ -91,7 +105,7 @@ namespace TechChallengeFIAP.Infrastructure.Repositories
         }
 
         /// <summary>
-        /// Faz uma busca de todos os contatos de acordo com o DDD inserido
+        /// Faz uma busca os contatos de acordo com o DDD fornecido ou retorna todos os contatos se não informado
         /// </summary>
         /// <param name="DDD"></param>
         /// <returns></returns>
@@ -124,7 +138,7 @@ namespace TechChallengeFIAP.Infrastructure.Repositories
         /// <returns></returns>
         public async Task<int> CountAsync()
         {
-            return await db.CountAsync();
+            return await fiapContext.Contatos.CountAsync(); // db.CountAsync();
         }
     }
 }

@@ -13,13 +13,13 @@ namespace TechChallengeFIAP.Core.Entities
         [Range(200000000, 999999999, ErrorMessage = "Telefone Inválido!")]
         public required string Numero { get; set; }
         public virtual string TelefoneCompleto => $"({DDD}) {Numero}";
-        public virtual string? UF
-        {
-            get
-            {
-                return DDDRegion.GetInfo(DDD).state;
-            }
-        }
+        public virtual string? UF { get; set; }
+        //{
+        //    get
+        //    {
+        //        return DDDRegionService.GetInfo(DDD).state;
+        //    }
+        //}
 
     }
 }

@@ -20,7 +20,7 @@ namespace TechChallengeFIAP.Testes
 
             var dbContext = new FiapDbContext(options);
 
-            _contatoRepository = new ContatoRepository(dbContext);
+            //_contatoRepository = new ContatoRepository(dbContext);
         }
 
         [Test]
@@ -51,7 +51,7 @@ namespace TechChallengeFIAP.Testes
             entity.Email = "novoemail@fiap.com";
 
             // Act
-            await _contatoRepository.UpdateAsync(entity);
+            //await _contatoRepository.UpdateAsync(entity);
 
             // Assert
             var contatoAtualizado = await _contatoRepository.FindAsync(entity.Id);

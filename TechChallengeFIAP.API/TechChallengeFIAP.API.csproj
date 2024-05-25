@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Middleware\AppEndpoints.cs" />
     <Compile Remove="Middleware\FiapMiddleware.cs" />
   </ItemGroup>
 
