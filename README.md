@@ -19,7 +19,7 @@
 <!--* [Status do Projeto](#status-do-Projeto)-->
 * [Descrição do Projeto](#descrição-do-projeto)
 * [Funcionalidades e Demonstração da Aplicação](#funcionalidades-e-demonstração-da-aplicação)
-* [Acesso ao Projeto](#acesso-ao-projeto)
+<!--* [Acesso ao Projeto](#acesso-ao-projeto)-->
 * [Tecnologias utilizadas](#tecnologias-utilizadas)
 * [Pessoas Contribuidoras](#pessoas-contribuidoras)
 * [Pessoas Desenvolvedoras do Projeto](#pessoas-desenvolvedoras)
@@ -78,6 +78,19 @@ formato de e-mail, telefone, campos obrigatórios).
 - `Atualizar Contato`: Atualiza um contato existente
     - Os parâmetros devem corresponder ao body do json, há validações para Id e E-mail repetido
 - `Deletar Contato`: Exclui um contato existente com i Id informado como parâmetro
+
+
+
+# Tecnologias utilizadas
+
+# Pessoas Contribuidoras(#tecnologias-utilizadas)
+
+# [Pessoas Desenvolvedoras do Projeto](#pessoas-desenvolvedoras)
+
+# [Licença](#licença)
+
+# [Conclusão](#conclusão)
+
 
 
 
