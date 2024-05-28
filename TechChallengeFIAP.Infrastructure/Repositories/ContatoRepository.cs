@@ -15,10 +15,10 @@ namespace TechChallengeFIAP.Infrastructure.Repositories
             ddd_service = _ddd_service;
             fiapContext = _fiapContext;
 
-            if (fiapContext.Contatos.Count() == 0)
-            {
-                SeedTest.Add(fiapContext, ddd_service);
-            }
+            //if (fiapContext.Contatos.Count() == 0)
+            //{
+            //    SeedTest.Add(fiapContext, ddd_service);
+            //}
 
         }
         
