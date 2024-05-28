@@ -25,6 +25,7 @@
 * [Descrição do Projeto](#descrição-do-projeto)
 * [Funcionalidades e Demonstração da Aplicação](#funcionalidades-e-demonstração-da-aplicação)
 * [Tecnologias utilizadas](#tecnologias-utilizadas)
+* [Link do Projeto no YouTube]
 * [Pessoas Desenvolvedoras do Projeto](#pessoas-desenvolvedoras-do-projeto)
 
 <!--
@@ -85,7 +86,8 @@ formato de e-mail, telefone, campos obrigatórios).
 # Tecnologias utilizadas
 - C#, .Net 8, Minimal API, InMemory Database, EF Core 8, OpenAPI
 
-
+# Link do Projeto no YouTube
+- https://www.youtube.com/watch?v=gmRAX21eDeo
 <!--# Pessoas Contribuidoras-->
 
 # Pessoas Desenvolvedoras do Projeto
