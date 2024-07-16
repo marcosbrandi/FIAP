@@ -8,10 +8,10 @@ using TechChallengeFIAP.Core.Interfaces;
 using TechChallengeFIAP.Infrastracture.Data;
 using TechChallengeFIAP.Infrastructure.Repositories;
 
-namespace TechChallengeFIAP.Testes
+namespace TechChallengeFIAP.Testes.Unitarios
 {
     [TestFixture]
-    public class RepositoryContatoTestes
+    public class RepositoryContatoUnitariosTestes
     {
         private IContatoRepository _contatoRepository;
         private FiapDbContext _dbContext;
