@@ -6,22 +6,10 @@ using TechChallengeFIAP.Infrastracture.Data;
 
 namespace TechChallengeFIAP.Infrastructure.Repositories
 {
-    public class ContatoRepository : IContatoRepository
+    public class ContatoRepository(FiapDbContext fiapContext, IDDDRegionService ddd_service) 
+        : IContatoRepository
     {
-        private FiapDbContext fiapContext;
-        private IDDDRegionService ddd_service;
-        public ContatoRepository(FiapDbContext _fiapContext, IDDDRegionService _ddd_service)
-        {
-            ddd_service = _ddd_service;
-            fiapContext = _fiapContext;
-
-            //if (fiapContext.Contatos.Count() == 0)
-            //{
-            //    SeedTest.Add(fiapContext, ddd_service);
-            //}
-
-        }
-        
+       
         /// <summary>
         /// Registra um contato na base recebendo
         /// TODO: Verificar como criar método de consulta de Contato por e-mail
@@ -30,7 +18,7 @@ namespace TechChallengeFIAP.Infrastructure.Repositories
         /// <returns></returns>
         public async Task<Contato> AddAsync(Contato contato)
         {
-            bool emailregistrado = await CheckRegisteredEmail(contato);
+            bool emailregistrado = CheckRegisteredEmail(contato).Result;
             if (emailregistrado)
             {
                 var dddinfo = await ddd_service.GetInfo(contato.Telefone.DDD);
@@ -39,7 +27,6 @@ namespace TechChallengeFIAP.Infrastructure.Repositories
             }
             await fiapContext.SaveChangesAsync();
             return contato;
-            
         }
         
         /// <summary>
@@ -63,7 +50,9 @@ namespace TechChallengeFIAP.Infrastructure.Repositories
         /// <exception cref="InvalidOperationException"></exception>
         public async Task<Contato> FindAsync(int ID)
         {
-            var contato = await fiapContext.Contatos.Include(x => x.Telefone).FirstOrDefaultAsync(x=> x.Id==ID);
+            var contato = await fiapContext.Contatos
+                                .Include(x => x.Telefone)
+                                .FirstOrDefaultAsync(x=> x.Id==ID);
             return contato;
         }
 
@@ -94,12 +83,13 @@ namespace TechChallengeFIAP.Infrastructure.Repositories
         /// <exception cref="WarningException"></exception>
         public async Task<bool> CheckRegisteredEmail(Contato contato)
         {
-            int contatos = CountAsync().Result;
-            if (contatos > 0)
+            if (CountAsync().Result > 0)
             {
-                var emailChecker = fiapContext.Contatos.Where(c => c.Email == contato.Email);
+                var emailChecker = await fiapContext.Contatos
+                                        .Where(c => c.Email == contato.Email)
+                                        .ToListAsync();
                 if(emailChecker.Any())
-                throw new WarningException($"O email inserido já está cadastrado");
+                    throw new WarningException($"O email inserido já está cadastrado");
             }
             return true;
         }
@@ -112,7 +102,10 @@ namespace TechChallengeFIAP.Infrastructure.Repositories
         /// <exception cref="InvalidOperationException"></exception>
         public async Task<IEnumerable<Contato>> GetAllAsync(string? DDD)
         {
-            var contatos = await fiapContext.Contatos.Include(x=> x.Telefone).Where(x => DDD == x.Telefone.DDD || DDD == null).ToListAsync();
+            var contatos = await fiapContext.Contatos
+                            .Include(x=> x.Telefone)
+                            .Where(x => DDD == x.Telefone.DDD || DDD == null)
+                            .ToListAsync();
             return contatos;
         }
 
@@ -138,7 +131,7 @@ namespace TechChallengeFIAP.Infrastructure.Repositories
         /// <returns></returns>
         public async Task<int> CountAsync()
         {
-            return await fiapContext.Contatos.CountAsync(); // db.CountAsync();
+            return await fiapContext.Contatos.CountAsync(); 
         }
     }
 }
