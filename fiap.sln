@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		links.txt = links.txt
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechChallengeFIAP.UnitTests", "TechChallengeFIAP.UnitTests\TechChallengeFIAP.UnitTests.csproj", "{66E3C310-7A5E-4C01-B048-CF9389EB9B84}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechChallengeFIAP.Testes", "TechChallengeFIAP.UnitTests\TechChallengeFIAP.Testes.csproj", "{66E3C310-7A5E-4C01-B048-CF9389EB9B84}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -9,6 +9,7 @@ using Swashbuckle.AspNetCore.Annotations;
 using Prometheus;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Prometheus.Client.HealthChecks;
+using System;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,8 +26,13 @@ builder.Services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {
     c.EnableAnnotations();
 });
 
+builder.Services.AddDbContext<FiapDbContext>(options =>
+{
+    var connectionString = builder.Configuration.GetConnectionString("FiapDbContextConnection");
+    options.UseNpgsql(connectionString);
+});
 
-builder.Services.AddDbContext<FiapDbContext>( opt => opt.UseInMemoryDatabase(databaseName: "fiap") );
+//builder.Services.AddDbContext<FiapDbContext>( opt => opt.UseInMemoryDatabase(databaseName: "fiap") );
 
 builder.Services.AddHttpClient();
 
