@@ -1,0 +1,53 @@
+pr:
+  branches:
+    include:
+      - "*"
+variables:
+  buildConfiguration: 'Release'
+  releaseBranchName: 'master'
+  dotnetSdkVersion: '6.x'
+
+stages:
+  - stage: 'Build'
+    jobs:
+    - job: 'Build'
+      displayName: 'Build Job'
+      pool: myagent
+    
+      steps:
+      - task: NuGetToolInstaller@1
+
+# Execucao dos testes unitarios
+      - task: DotNetCoreCLI@2
+        displayName: 'executing tests'
+        inputs:
+          command: test
+          projects: '**/*tests/*.csproj'
+          arguments: '--configuration $(buildConfiguration)'
+
+#Restore
+      - task: DotNetCoreCLI@2
+        displayName: 'Restore'
+        inputs:
+          command: 'restore'
+          projects: '**/*.csproj'
+          feedsToUse: 'select'
+
+      - task: DotNetCoreCLI@2
+        displayName: 'Build'
+        inputs:
+          command: 'build'
+          arguments: '--no-restore --configuration $(buildConfiguration)'
+          projects: '**/*.csproj'
+
+      - task: DotNetCoreCLI@2
+        displayName: 'Publish Project'
+        inputs:
+          command: 'publish'
+          projects: '**/*.csproj'
+          publishWebProjects: false
+          arguments: '--no-build --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/$(buildConfiguration)'
+          zipAfterPublish: true
+
+      - publish: '$(Build.ArtifactStagingDirectory)'
+        artifact: drop
