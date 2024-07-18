@@ -8,18 +8,20 @@ using TechChallengeFIAP.Core.Interfaces;
 using Swashbuckle.AspNetCore.Annotations;
 using System;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { 
-    Title = "Contatos API", Description = "Cadastro de Contatos", Version = "v1" });
+builder.Services.AddSwaggerGen(c => {
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Contatos API",
+        Description = "Cadastro de Contatos",
+        Version = "v1"
+    });
 
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-
     c.EnableAnnotations();
 });
 
@@ -29,7 +31,7 @@ builder.Services.AddDbContext<FiapDbContext>(options =>
     options.UseNpgsql(connectionString);
 });
 
-//builder.Services.AddDbContext<FiapDbContext>( opt => opt.UseInMemoryDatabase(databaseName: "fiap") );
+//builder.Services.AddDbContext<FiapDbContext>(opt => opt.UseInMemoryDatabase(databaseName: "fiap"));
 
 builder.Services.AddHttpClient();
 
@@ -38,11 +40,22 @@ ServiceInterfaces.Add(builder.Services);
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment()) { app.UseDeveloperExceptionPage(); }
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+}
 
 app.UseSwagger();
-app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Contatos API V1"); });
+app.UseSwaggerUI(c => {
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Contatos API V1");
+});
 
+//migrations at startup
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<FiapDbContext>();
+    dbContext.Database.Migrate();
+}
 
 // declara endpoints
 const string baseUrl = @"/v1/contatos";
@@ -85,12 +98,12 @@ app.MapPost("Inserir/Contato", async (Contato contato, IContatoRepository reposi
 }).WithMetadata(new SwaggerOperationAttribute($"Cria um novo contato, os parâmetros devem corresponder ao body do json, há validações para Id e E-mail repetido"));
 
 // Atualiza um contato
-app.MapPut("Atualizar/Contato", async (int id,Contato contato, IContatoRepository repository) =>
+app.MapPut("Atualizar/Contato", async (int id, Contato contato, IContatoRepository repository) =>
 {
     Contato currentContato = await repository.FindAsync(id);
     if (currentContato != null)
     {
-        await repository.UpdateAsync(currentContato,contato);
+        await repository.UpdateAsync(currentContato, contato);
         return Results.Ok($"Registro(s) atualizado(s) com sucesso!");
     }
     return Results.NotFound($"Contato ID {id} não localizado.");
@@ -109,6 +122,3 @@ app.MapDelete("Deletar/Contato", async (int id, IContatoRepository repository) =
 }).WithMetadata(new SwaggerOperationAttribute("Deleta um contato correspondente ao Id recebido como parâmetro"));
 
 app.Run();
-
-
-
