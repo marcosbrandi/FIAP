@@ -6,9 +6,6 @@ using TechChallengeFIAP.Infrastracture.Data;
 using TechChallengeFIAP.Core.Entities;
 using TechChallengeFIAP.Core.Interfaces;
 using Swashbuckle.AspNetCore.Annotations;
-using Prometheus;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
-using Prometheus.Client.HealthChecks;
 using System;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -38,14 +35,7 @@ builder.Services.AddDbContext<FiapDbContext>(options =>
 
 builder.Services.AddHttpClient();
 
-
-builder.Services
-    .AddHealthChecks()
-    .AddUrlGroup(new Uri("https://google.com"), "google", HealthStatus.Unhealthy)
-    .AddUrlGroup(new Uri("https://invalidurl"), "invalidurl", HealthStatus.Degraded);
-builder.Services.AddPrometheusHealthCheckPublisher();
-
-// declare interfaces
+// declara interfaces
 ServiceInterfaces.Add(builder.Services);
 
 var app = builder.Build();
@@ -55,24 +45,20 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 }
 
-// setup Swagger
 app.UseSwagger();
 app.UseSwaggerUI(c => {
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Contatos API V1");
 });
 
-//migrations at startup
+// Apply migrations at startup
 using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<FiapDbContext>();
     dbContext.Database.Migrate();
 }
-//These metrics are called to use prometheus
-app.UseMetricServer();
-app.UseHttpMetrics();
 
-// declare endpoints
-APIEndpoints.Configure(app);
+// declara endpoints
+const string baseUrl = @"/v1/contatos";
 
 // Retorna um contato pelo DDD ou todos os contatos
 app.MapGet("/Buscar/DDD", async (string? DDD, IContatoRepository repository) =>
@@ -134,7 +120,5 @@ app.MapDelete("Deletar/Contato", async (int id, IContatoRepository repository) =
     }
     return Results.NotFound();
 }).WithMetadata(new SwaggerOperationAttribute("Deleta um contato correspondente ao Id recebido como parâmetro"));
-// declare Prometheus endpoints
-PrometheusEndpoints.Configure(app);
 
 app.Run();
