@@ -25,11 +25,8 @@ builder.Services.AddSwaggerGen(c => {
     c.EnableAnnotations();
 });
 
-builder.Services.AddDbContext<FiapDbContext>(options =>
-{
-    var connectionString = builder.Configuration.GetConnectionString("FiapDbContextConnection");
-    options.UseNpgsql(connectionString);
-});
+builder.Services.AddDbContext<FiapDbContext>(options => 
+options.UseNpgsql(builder.Configuration.GetConnectionString("FiapDbContextConnection")));
 
 //builder.Services.AddDbContext<FiapDbContext>(opt => opt.UseInMemoryDatabase(databaseName: "fiap"));
 

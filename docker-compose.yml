@@ -1,0 +1,23 @@
+version: '3.4'
+
+services:
+  techchallengefiap.api:
+    image: ${DOCKER_REGISTRY-}techchallengefiapapi
+    container_name: techchallengefiap.api
+    build:
+      context: .
+      dockerfile: TechChallengeFIAP.API/Dockerfile
+    ports: 
+       - "5000:5000"
+       - "5001:5001"
+  techchallengefiap.database:
+      image: postgres:latest
+      container_name: techchallengefiap.database
+      environment: 
+        - POSTGRES_DB=fiap
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=postgres
+      volumes:
+        - ./.containers/techchallengefiap-db:/var/lib/postgresql/data  
+      ports:
+        - 5432:5432
