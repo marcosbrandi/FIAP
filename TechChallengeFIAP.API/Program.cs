@@ -9,10 +9,17 @@ using Swashbuckle.AspNetCore.Annotations;
 using System;
 using Prometheus;
 using Prometheus.Client.AspNetCore;
+using Prometheus.Client.HealthChecks;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
+builder.Services
+    .AddHealthChecks()
+    .AddUrlGroup(new Uri("https://google.com"), "google", HealthStatus.Unhealthy)
+    .AddUrlGroup(new Uri("https://invalidurl"), "invalidurl", HealthStatus.Degraded);
+builder.Services.AddPrometheusHealthCheckPublisher();
 
 builder.Services.AddSwaggerGen(c => {
     c.SwaggerDoc("v1", new OpenApiInfo
@@ -40,12 +47,18 @@ ServiceInterfaces.Add(builder.Services);
 
 var app = builder.Build();
 
+//These metrics are called to use prometheus
+app.UseMetricServer();
+app.UseHttpMetrics();
 app.UsePrometheusServer();
 
-app.UseHttpMetrics(options =>
-{
-    options.AddCustomLabel("host", context => context.Request.Host.Host);
-});
+//declare endpoints
+APIEndpoints.Configure(app);
+
+//app.UseHttpMetrics(options =>
+//{
+//    options.AddCustomLabel("host", context => context.Request.Host.Host);
+//});
 
 if (app.Environment.IsDevelopment())
 {
@@ -57,23 +70,19 @@ app.UseSwaggerUI(c => {
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Contatos API V1");
 });
 
+PrometheusEndpoints.Configure(app);
+
 // Apply migrations at startup
 using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<FiapDbContext>();
 }
 
-// declare endpoints
-APIEndpoints.Configure(app);
-
-// declare Prometheus endpoints
-PrometheusEndpoints.Configure(app);
-
 Counter _counter = Metrics.CreateCounter("TestMetricCounter", "will be incremented and published as metrics");
 //Histogram _histogram = Metrics.CreateHistogram("TestMetricHistogram", "Will observe a value and publish it as Histogram");
 //Gauge _gauge = Metrics.CreateGauge("TestMetricGauge", "Will observe a value and publish it as Gauge");
 //Summary _summary = Metrics.CreateSummary("TestMetricSummary", "Will observe a value and publish it as Summary");
-app.UseMetricServer();
+
 
 var counter = Metrics.CreateCounter("TestMetricCounter", "Counts requests to endpoints",
     new CounterConfiguration
