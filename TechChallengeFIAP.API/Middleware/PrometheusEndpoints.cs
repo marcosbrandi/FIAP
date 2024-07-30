@@ -15,6 +15,7 @@ public static class PrometheusEndpoints
         //Histogram _histogram = Metrics.CreateHistogram("TestMetricHistogram", "Will observe a value and publish it as Histogram");
         //Gauge _gauge = Metrics.CreateGauge("TestMetricGauge", "Will observe a value and publish it as Gauge");
         //Summary _summary = Metrics.CreateSummary("TestMetricSummary", "Will observe a value and publish it as Summary");
+        app.UseMetricServer();
 
         var counter = Metrics.CreateCounter("TestMetricCounter", "Counts requests to endpoints", 
             new CounterConfiguration
@@ -28,10 +29,10 @@ public static class PrometheusEndpoints
             return next();
         });
 
-        app.UseHealthChecks("/hc", new HealthCheckOptions
-        {
-            Predicate = _ => true
-        });
+        //app.UseHealthChecks("/hc", new HealthCheckOptions
+        //{
+        //    Predicate = _ => true
+        //});
 
         /*
         app.MapPost("/IncrementCounter", (int inc) =>

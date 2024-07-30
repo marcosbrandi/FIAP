@@ -7,6 +7,8 @@ using TechChallengeFIAP.Core.Entities;
 using TechChallengeFIAP.Core.Interfaces;
 using Swashbuckle.AspNetCore.Annotations;
 using System;
+using Prometheus;
+using Prometheus.Client.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,12 +32,18 @@ options.UseNpgsql(builder.Configuration.GetConnectionString("FiapDbContextConnec
 
 //builder.Services.AddDbContext<FiapDbContext>(opt => opt.UseInMemoryDatabase(databaseName: "fiap"));
 
+
 builder.Services.AddHttpClient();
 
 // declara interfaces
 ServiceInterfaces.Add(builder.Services);
 
 var app = builder.Build();
+
+PrometheusEndpoints.Configure(app);
+
+app.UsePrometheusServer();
+app.UseHttpMetrics();
 
 if (app.Environment.IsDevelopment())
 {
