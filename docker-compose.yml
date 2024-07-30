@@ -50,7 +50,7 @@ services:
   #           condition: service_healthy
     
   grafana:
-    container_name: grafana_grafprom
+    container_name: grafana
     image: grafana/grafana:master
     ports:
       - "3000:3000"
@@ -69,7 +69,7 @@ services:
 
   prometheus:
     image: prom/prometheus
-    container_name: prometheus_grafprom
+    container_name: prometheus
     restart: always
     ports:
       - 9090:9090
