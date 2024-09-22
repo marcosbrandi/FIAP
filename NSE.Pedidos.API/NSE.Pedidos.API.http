@@ -1,0 +1,6 @@
+@Fiap.Pedidos.API_HostAddress = http://localhost:5008
+
+GET {{Fiap.Pedidos.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
