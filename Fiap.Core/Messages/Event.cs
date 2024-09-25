@@ -1,11 +1,15 @@
-﻿using MediatR;
+﻿using System;
+using MediatR;
 
 namespace Fiap.Core.Messages
 {
-    public abstract class Event : Message, INotification
+    public class Event : Message, INotification
     {
-        public DateTime TimeStamp { get; protected set; }
+        public DateTime Timestamp { get; private set; }
 
-        protected Event() => TimeStamp = DateTime.Now;
+        protected Event()
+        {
+            Timestamp = DateTime.Now;
+        }
     }
 }

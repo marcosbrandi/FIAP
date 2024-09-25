@@ -1,18 +1,20 @@
 ﻿using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Fiap.Core.Communication;
 
 namespace Fiap.WebAPI.Core.Controllers
 {
     [ApiController]
-    public abstract class MainController : ControllerBase
+    public abstract class MainController : Controller
     {
-        private readonly List<string> Erros = new();
+        protected ICollection<string> Erros = new List<string>();
 
-        protected ActionResult CustomResponse(object? result = null)
+        protected ActionResult CustomResponse(object result = null)
         {
-            if (OperacaoValida()) return Ok(result);
+            if (OperacaoValida())
+            {
+                return Ok(result);
+            }
 
             return BadRequest(new ValidationProblemDetails(new Dictionary<string, string[]>
             {
@@ -22,14 +24,10 @@ namespace Fiap.WebAPI.Core.Controllers
 
         protected ActionResult CustomResponse(ModelStateDictionary modelState)
         {
-            if (modelState.IsValid) return CustomResponse();
-
-            IEnumerable<ModelError> errors = modelState.Values.SelectMany(e => e.Errors);
-
-            foreach (ModelError error in errors)
+            var erros = modelState.Values.SelectMany(e => e.Errors);
+            foreach (var erro in erros)
             {
-                string message = error.Exception == null ? error.ErrorMessage : error.Exception.Message;
-                Erros.Add(message);
+                AdicionarErroProcessamento(erro.ErrorMessage);
             }
 
             return CustomResponse();
@@ -37,42 +35,27 @@ namespace Fiap.WebAPI.Core.Controllers
 
         protected ActionResult CustomResponse(ValidationResult validationResult)
         {
-            AdicionarErros(validationResult.Errors.Select(e => e.ErrorMessage).ToArray());
+            foreach (var erro in validationResult.Errors)
+            {
+                AdicionarErroProcessamento(erro.ErrorMessage);
+            }
 
             return CustomResponse();
         }
 
-        protected ActionResult CustomErrorResponse(params string[] erros)
+        protected bool OperacaoValida()
         {
-            if (erros == null || !erros.Any()) return CustomResponse();
-
-            AdicionarErros(erros);
-
-            return CustomResponse();
+            return !Erros.Any();
         }
 
-        protected ActionResult CustomResponse(ResponseResult resposta)
+        protected void AdicionarErroProcessamento(string erro)
         {
-            ResponsePossuiErros(resposta);
-
-            return CustomResponse();
+            Erros.Add(erro);
         }
 
-        protected bool ResponsePossuiErros(ResponseResult resposta)
+        protected void LimparErrosProcessamento()
         {
-            if (resposta == null || !resposta.Errors.Mensagens.Any()) return false;
-
-            AdicionarErros(resposta.Errors.Mensagens.ToArray());
-
-            return true;
+            Erros.Clear();
         }
-
-        protected bool OperacaoValida() => !Erros.Any();
-
-        protected bool OperacaoInvalida() => !OperacaoValida();
-
-        protected void AdicionarErros(params string[] erros) => Erros.AddRange(erros);
-
-        protected void LimparErros() => Erros.Clear();
     }
 }

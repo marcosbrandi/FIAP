@@ -1,15 +1,22 @@
-﻿using FluentValidation.Results;
+﻿using System;
+using FluentValidation.Results;
 using MediatR;
 
 namespace Fiap.Core.Messages
 {
     public abstract class Command : Message, IRequest<ValidationResult>
     {
-        public DateTime TimeStamp { get; private set; }
-        public ValidationResult ValidationResult { get; protected set; }
+        public DateTime Timestamp { get; private set; }
+        public ValidationResult ValidationResult { get; set; }
 
-        protected Command() => TimeStamp = DateTime.Now;
+        protected Command()
+        {
+            Timestamp = DateTime.Now;
+        }
 
-        public virtual bool EhValido() => ValidationResult.IsValid;
+        public virtual bool EhValido()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

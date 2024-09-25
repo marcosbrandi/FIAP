@@ -1,11 +1,16 @@
-﻿namespace Fiap.Core.DomainObjects
+﻿using System;
+
+namespace Fiap.Core.DomainObjects
 {
     public class DomainException : Exception
     {
-        public DomainException() { }
+        public DomainException()
+        { }
 
-        public DomainException(string message) : base(message) { }
+        public DomainException(string message) : base(message)
+        { }
 
-        public DomainException(string message, Exception innerException) : base(message, innerException) { }
+        public DomainException(string message, Exception innerException) : base(message, innerException)
+        { }
     }
 }

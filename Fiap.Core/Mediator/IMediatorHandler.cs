@@ -1,4 +1,5 @@
-﻿using FluentValidation.Results;
+﻿using System.Threading.Tasks;
+using FluentValidation.Results;
 using Fiap.Core.Messages;
 
 namespace Fiap.Core.Mediator

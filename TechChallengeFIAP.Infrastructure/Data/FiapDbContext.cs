@@ -8,6 +8,7 @@ namespace TechChallengeFIAP.Infrastracture.Data
         public FiapDbContext(DbContextOptions<FiapDbContext> options) : base(options) {
 
         }
+
         public DbSet<Contato> Contatos { get; set; }
         public DbSet<Telefone> Telefones { get; set; }
 

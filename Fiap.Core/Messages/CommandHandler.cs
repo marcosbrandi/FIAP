@@ -1,4 +1,5 @@
-﻿using FluentValidation.Results;
+﻿using System.Threading.Tasks;
+using FluentValidation.Results;
 using Fiap.Core.Data;
 
 namespace Fiap.Core.Messages
@@ -15,11 +16,6 @@ namespace Fiap.Core.Messages
         protected void AdicionarErro(string mensagem)
         {
             ValidationResult.Errors.Add(new ValidationFailure(string.Empty, mensagem));
-        }
-        
-        protected void AdicionarErros(List<ValidationFailure> falhasValidacoes)
-        {
-            ValidationResult.Errors.AddRange(falhasValidacoes);
         }
 
         protected async Task<ValidationResult> PersistirDados(IUnitOfWork uow)
