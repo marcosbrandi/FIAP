@@ -1,7 +1,9 @@
 
 using Fiap.Clientes.API.Configuration;
 using MediatR;
+using Microsoft.OpenApi.Models;
 using System.Reflection;
+using TechChallenge.API.Endpoints;
 
 namespace TechChallenge.Consumer
 {
@@ -11,19 +13,13 @@ namespace TechChallenge.Consumer
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
 
+            builder.Services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "Contatos API", Description = "Cadastro de Contatos", Version = "v1" }); });
 
             builder.Services.AddApiConfiguration(builder.Configuration);
-
-            //builder.Services.AddJwtConfiguration(Configuration);
-
-            builder.Services.AddSwaggerConfiguration();
 
             builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 
@@ -33,12 +29,14 @@ namespace TechChallenge.Consumer
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
+            if (app.Environment.IsDevelopment()) { app.UseDeveloperExceptionPage(); }
+            app.UseSwagger();
+
+            //ContatoEndpoints.Map(app);
+            ContatoEndpoints.Map1(app);
+            BuscarContatos.AddRoutes(app);
+
+            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Contatos API V1"); });
 
             app.UseHttpsRedirection();
 

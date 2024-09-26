@@ -28,7 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Application\DTO\" />
     <Folder Include="Application\Queries\" />
   </ItemGroup>
 </Project>

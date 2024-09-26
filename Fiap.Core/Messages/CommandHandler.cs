@@ -1,6 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using Fiap.Core.Data;
 using FluentValidation.Results;
-using Fiap.Core.Data;
 
 namespace Fiap.Core.Messages
 {

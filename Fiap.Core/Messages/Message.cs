@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Fiap.Core.Messages
+﻿namespace Fiap.Core.Messages
 {
     public abstract class Message
     {

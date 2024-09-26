@@ -7,10 +7,10 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-COPY ["src/services/Fiap.Clientes.API/Fiap.Clientes.API.csproj", "src/services/Fiap.Clientes.API/"]
+COPY ["src/Fiap.Clientes.API/Fiap.Clientes.API.csproj", "src/services/Fiap.Clientes.API/"]
 RUN dotnet restore "src/services/Fiap.Clientes.API/Fiap.Clientes.API.csproj"
 COPY . .
-WORKDIR "/src/src/services/Fiap.Clientes.API"
+WORKDIR "/src/src/Fiap.Clientes.API"
 RUN dotnet build "Fiap.Clientes.API.csproj" -c Release -o /app/build
 
 FROM build AS publish

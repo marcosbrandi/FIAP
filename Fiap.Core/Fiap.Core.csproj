@@ -7,6 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Messages\Integration\PedidoAutorizadoIntegrationEvent.cs" />
+    <Compile Remove="Messages\Integration\PedidoBaixadoEstoqueIntegrationEvent.cs" />
+    <Compile Remove="Messages\Integration\PedidoCanceladoIntegrationEvent.cs" />
+    <Compile Remove="Messages\Integration\PedidoIniciadoIntegrationEvent.cs" />
+    <Compile Remove="Messages\Integration\PedidoPagoIntegrationEvent.cs" />
+    <Compile Remove="Messages\Integration\PedidoRealizadoIntegrationEvent.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FluentValidation" Version="11.10.0" />
     <PackageReference Include="MediatR" Version="10.0.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />

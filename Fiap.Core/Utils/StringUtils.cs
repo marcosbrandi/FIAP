@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace Fiap.Core.Utils
+﻿namespace Fiap.Core.Utils
 {
     public static class StringUtils
     {
