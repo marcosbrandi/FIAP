@@ -18,8 +18,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TechChallengeFIAP.Core\TechChallengeFIAP.Core.csproj" />
-    <ProjectReference Include="..\TechChallengeFIAP.Infrastructure\TechChallengeFIAP.Infrastructure.csproj" />
+    <ProjectReference Include="..\Fiap.Core\Fiap.Core.csproj" />
+    <ProjectReference Include="..\Fiap.MessageBus\Fiap.MessageBus.csproj" />
+    <ProjectReference Include="..\Fiap.WebAPI.Core\Fiap.WebAPI.Core.csproj" />
+    <ProjectReference Include="..\TechChallenge.API\TechChallenge.API.csproj" />
+    <ProjectReference Include="..\TechChallenge.Domain\TechChallenge.Domain.csproj" />
+    <ProjectReference Include="..\TechChallenge.Infrastructure\TechChallenge.Infrastructure.csproj" />
+    <ProjectReference Include="..\TechChallenge.Producer\TechChallenge.Producer.csproj" />
   </ItemGroup>
 
   <ItemGroup>
