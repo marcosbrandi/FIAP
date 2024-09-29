@@ -1,0 +1,94 @@
+version: '3.4'
+
+volumes:
+  grafana_data: {}
+  rabbitmq_data:
+  rabbitmq_log:
+services:
+
+  techchallenge.rabbitmq:
+    image: ${DOCKER_REGISTRY-}rabbitmq
+    container_name: techchallenge.rabbitmq
+    environment: 
+        RABBITMQ_DEFAULT_USER: 'guest'
+        RABBITMQ_DEFAULT_PASS: 'guest'
+    ports:
+        - '15672:15672'
+        - '5672:5672'
+    volumes:
+        - rabbitmq_data:/var/lib/rabbitmq
+        - rabbitmq_log:/var/lib/rabbitmq
+
+  techchallenge.api:
+    image: ${DOCKER_REGISTRY-}techchallengeapi
+    build:
+      context: .
+      dockerfile: TechChallenge.API/Dockerfile
+    ports: 
+       - "5000:5000"
+       - "5001:5001"
+
+  techchallenge.producer:
+    image: ${DOCKER_REGISTRY-}techchallengeproducer
+    build:
+      context: .
+      dockerfile: TechChallenge.Producer/Dockerfile
+    ports: 
+       - "5002:5002"
+       - "5003:5003"
+  # prometheus:
+  #   image: prom/prometheus
+  #   container_name: prometheus
+  #   restart: always
+  #   ports:
+  #     - 9090:9090
+  #   volumes:
+  #     - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+  #   healthcheck:
+  #       test: wget -q --tries=1 -O- http://localhost:9090/
+  #       interval: 3s
+  #       timeout: 3s
+  #       retries: 10
+  #       start_period: 10s
+  # grafana:
+  #   container_name: grafana
+  #   image: grafana/grafana:master
+  #   ports:
+  #     - "3000:3000"
+  #   volumes:
+  #       - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
+  #       - ./grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
+  #   depends_on:
+  #       prometheus:
+  #           condition: service_healthy
+  #   healthcheck:
+  #       test: wget -q --tries=1 -O- http://localhost:3000/
+  #       interval: 3s
+  #       timeout: 3s
+  #       retries: 10
+  #       start_period: 10s
+
+  # techchallengefiap.unittests:
+  #   image: ${DOCKER_REGISTRY-}techchallengefiapunittests
+  #   build:
+  #     context: .
+  #     dockerfile: TechChallengeFIAP.UnitTests/Dockerfile
+
+  techchallengefiap.database:
+    image: postgres:latest
+    container_name: techchallengefiap.database
+    environment: 
+    - POSTGRES_DB=FIAP
+    - POSTGRES_USER=postgres
+    - POSTGRES_PASSWORD=admin
+    volumes:
+    - ./.containers/techchallengefiap-db:/var/lib/postgresql/data  
+    ports:
+    - 5432:5432
+
+
+
+        
+   
+
+

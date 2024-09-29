@@ -3,6 +3,7 @@ using Fiap.Clientes.API.Configuration;
 using MediatR;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
+using TechChallenge.API.Configuration;
 using TechChallenge.API.Endpoints;
 
 namespace TechChallenge.Consumer
@@ -12,6 +13,8 @@ namespace TechChallenge.Consumer
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+			builder.Services.AddHttpClient();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -38,7 +41,9 @@ namespace TechChallenge.Consumer
 
             app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Contatos API V1"); });
 
-            app.UseHttpsRedirection();
+			app.ApplyMigrations();
+
+			app.UseHttpsRedirection();
 
             app.UseAuthorization();
 

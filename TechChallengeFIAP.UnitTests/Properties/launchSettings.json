@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "TechChallengeFIAP.UnitTests": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}
