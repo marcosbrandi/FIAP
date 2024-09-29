@@ -10,6 +10,7 @@ using Prometheus.Client.AspNetCore;
 using Prometheus.Client.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using TechChallengeFIAP.API.Middleware;
+using RabbitMQ.Client;
 
 namespace TechChallenge.Consumer
 {
@@ -25,11 +26,11 @@ namespace TechChallenge.Consumer
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
 
-            builder.Services
-                .AddHealthChecks()
-                .AddUrlGroup(new Uri("https://google.com"), "google", HealthStatus.Unhealthy)
-                .AddUrlGroup(new Uri("https://invalidurl"), "invalidurl", HealthStatus.Degraded);
-            builder.Services.AddPrometheusHealthCheckPublisher();
+            //builder.Services
+            //    .AddHealthChecks()
+            //    .AddUrlGroup(new Uri("https://google.com"), "google", HealthStatus.Unhealthy)
+            //    .AddUrlGroup(new Uri("https://invalidurl"), "invalidurl", HealthStatus.Degraded);
+            //builder.Services.AddPrometheusHealthCheckPublisher();
 
             builder.Services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "Contatos API", Description = "Cadastro de Contatos", Version = "v1" }); });
 
@@ -63,6 +64,20 @@ namespace TechChallenge.Consumer
 			app.UseHttpsRedirection();
 
             app.UseAuthorization();
+
+            //var factory = new ConnectionFactory
+            //{
+            //    HostName = "localhost",
+            //    Port = 5672,
+            //    UserName = "guest",
+            //    Password = "guest",
+            //    VirtualHost = "FIAP",
+            //    ClientProvidedName = "teste"
+            //};
+
+            //using var connection =  factory.CreateConnection();
+            //using var channel = connection.CreateModel();
+            //const string queueName = "fila_teste";
 
             app.MapControllers();
 

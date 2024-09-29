@@ -7,7 +7,7 @@ volumes:
 services:
 
   techchallenge.rabbitmq:
-    image: ${DOCKER_REGISTRY-}rabbitmq
+    image: ${DOCKER_REGISTRY-}masstransit/rabbitmq
     container_name: techchallenge.rabbitmq
     environment: 
         RABBITMQ_DEFAULT_USER: 'guest'
@@ -75,16 +75,16 @@ services:
   #     dockerfile: TechChallengeFIAP.UnitTests/Dockerfile
 
   techchallengefiap.database:
-    image: postgres:latest
-    container_name: techchallengefiap.database
-    environment: 
-    - POSTGRES_DB=FIAP
-    - POSTGRES_USER=postgres
-    - POSTGRES_PASSWORD=admin
-    volumes:
-    - ./.containers/techchallengefiap-db:/var/lib/postgresql/data  
-    ports:
-    - 5432:5432
+      image: postgres:latest
+      container_name: techchallengefiap.database
+      environment: 
+        - POSTGRES_DB=FIAP
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=postgres
+      volumes:
+        - ./.containers/techchallengefiap-db:/var/lib/postgresql/data1  
+      ports:
+        - 5432:5432
 
 
 

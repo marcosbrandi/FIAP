@@ -1,22 +1,28 @@
-#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
+#See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+USER app
 WORKDIR /app
-EXPOSE 80
-EXPOSE 443
+EXPOSE 8080
+EXPOSE 8081
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["src/services/Fiap.Identidade.API/Fiap.Identidade.API.csproj", "src/services/Fiap.Identidade.API/"]
-RUN dotnet restore "src/services/Fiap.Identidade.API/Fiap.Identidade.API.csproj"
+COPY ["TechChallenge.Producer/TechChallenge.Producer.csproj", "TechChallenge.Producer/"]
+COPY ["Fiap.Core/Fiap.Core.csproj", "Fiap.Core/"]
+COPY ["Fiap.MessageBus/Fiap.MessageBus.csproj", "Fiap.MessageBus/"]
+COPY ["Fiap.WebAPI.Core/Fiap.WebAPI.Core.csproj", "Fiap.WebAPI.Core/"]
+RUN dotnet restore "./TechChallenge.Producer/TechChallenge.Producer.csproj"
 COPY . .
-WORKDIR "/src/src/services/Fiap.Identidade.API"
-RUN dotnet build "Fiap.Identidade.API.csproj" -c Release -o /app/build
+WORKDIR "/src/TechChallenge.Producer"
+RUN dotnet build "./TechChallenge.Producer.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Fiap.Identidade.API.csproj" -c Release -o /app/publish
+ARG BUILD_CONFIGURATION=Release
+RUN dotnet publish "./TechChallenge.Producer.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Fiap.Identidade.API.dll"]
+ENTRYPOINT ["dotnet", "TechChallenge.Producer.dll"]
