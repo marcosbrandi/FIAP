@@ -24,6 +24,7 @@
 
 * [Descrição do Projeto](#descrição-do-projeto)
 * [Funcionalidades e Demonstração da Aplicação](#funcionalidades-e-demonstração-da-aplicação)
+* [Testes](#testes)
 * [Tecnologias utilizadas](#tecnologias-utilizadas)
 * [Link do Projeto no YouTube](#link-do-projeto-no-youtube)
 * [Pessoas Desenvolvedoras do Projeto](#pessoas-desenvolvedoras-do-projeto)
@@ -105,6 +106,13 @@ Além disso, o teste também valida a funcionalidade do endpoint de criação de
 
 # Docker
 <img loading="lazy" width="100%" height="100%" src="https://github.com/marcosbrandi/FIAP/blob/master/Docs/Domain%20Storytelling/Docker.jpg"/>
+
+# Prometheus
+<img loading="lazy" width="100%" height="100%" src="https://github.com/marcosbrandi/FIAP/blob/master/Docs/Domain%20Storytelling/Prometheus.jpg"/>
+
+# Grafana
+<img loading="lazy" width="100%" height="100%" src="https://github.com/marcosbrandi/FIAP/blob/master/Docs/Domain%20Storytelling/Grafana.jpg"/>
+
 
 
 # Tecnologias utilizadas
