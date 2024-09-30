@@ -73,6 +73,7 @@ Demonstração da comunicação entre microsserviços via RabbitMQ, ilustrando a
 <img loading="lazy" width="100%" height="100%" src="https://github.com/marcosbrandi/FIAP/blob/master/Docs/Domain%20Storytelling/Endpoints.PNG"/>
 -->
 <img loading="lazy" width="100%" height="100%" src="https://github.com/marcosbrandi/FIAP/blob/master/Docs/Domain%20Storytelling/Endpoint-Producer.jpg"/>
+
 - `Inserir Contato`: Cria um novo contato
     - Os parâmetros devem corresponder ao body do json, há validações para Id e E-mail repetido
 - `Atualizar Contato`: Atualiza um contato existente
@@ -80,6 +81,7 @@ Demonstração da comunicação entre microsserviços via RabbitMQ, ilustrando a
 - `Deletar Contato`: Exclui um contato existente com i Id informado como parâmetro
 
 <img loading="lazy" width="100%" height="100%" src="https://github.com/marcosbrandi/FIAP/blob/master/Docs/Domain%20Storytelling/Endpoint-Consumer.jpg"/>
+
 - `Consulta por Nome`: Retorna um contato passando o Nome como parâmetro de busca
 - `Consulta por ID`: Retorna um contato passando Id de registro como parâmetro de busca
 - `Consulta por DDD`: Retorna os contatos correspondentes ao DDD recebido como parâmetro de busca
