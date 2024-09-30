@@ -35,22 +35,24 @@
 
 # Descrição do Projeto
 
-* O Problema
-  - O Tech Challenge desta fase será desenvolver um aplicativo utilizando a plataforma .NET 8 para cadastro
-de contatos regionais, considerando a persistência de dados e a qualidade do software.
+Nesta etapa, a iniciativa evolui para incorporar conceitos mais avançados, como a arquitetura de microsserviços e a comunicação assíncrona. O objetivo principal é refatorar um aplicativo .NET previamente desenvolvido para gerenciar contatos regionais, aprimorando sua estrutura e funcionalidades.
 
-* Requisitos Funcionais
-  - Cadastro de contatos: permitir o cadastro de novos contatos, incluindo nome, telefone e e-mail. As‐
-socie cada contato a um DDD correspondente à região.
-  - Consulta de contatos: implementar uma funcionalidade para consultar e visualizar os contatos ca‐ dastrados, os quais podem ser filtrados pelo DDD da região.
-  - Atualização e exclusão: possibilitar a atualização e exclusão de contatos previamente cadastrados.
+* Objetivos Principais
+* 
+ - Arquitetura de Microsserviços: Transformar o aplicativo monolítico em um conjunto de microsserviços independentes, cada um encarregado de uma funcionalidade específica (como cadastro, consulta, atualização e exclusão de contatos).
+ - Comunicação Assíncrona: Implementar o RabbitMQ para facilitar a comunicação entre os microsserviços, permitindo o envio de dados por meio de filas. Isso envolve a criação de um microsserviço que coleta dados e os envia para uma fila, onde um microsserviço consumidor irá processar essas informações e persistir no banco de dados.
+ - Criar testes unitário e de integração
 
 * Requisitos Técnicos
-  - Persistência de Dados: utilizar um banco de dados para armazenar as informações dos contatos. Escolha entre Entity Framework Core ou Dapper para a camada de acesso a dados.
-  - Validações: implementar validações para garantir dados consistentes (por exemplo: validação de
-formato de e-mail, telefone, campos obrigatórios).
-  - Testes Unitários: desenvolver testes unitários utilizando xUnit ou NUnit.
 
+Reestruturar o aplicativo em microsserviços menores, seguindo padrões de design, como Circuit Breaker, quando necessário.
+Configurar o RabbitMQ para gerenciar a fila de mensagens, desenvolvendo tanto produtores quanto consumidores para as operações de criação, atualização e exclusão de contatos.
+
+* Critérios de Aceite
+
+Funcionamento da pipeline com testes unitários e de integração.
+Monitoramento utilizando Prometheus e Grafana, conforme os requisitos técnicos da fase anterior.
+Demonstração da comunicação entre microsserviços via RabbitMQ, ilustrando a inserção de dados na fila e o processamento pelo consumidor.
 
 # Funcionalidades e Demonstração da Aplicação
 
