@@ -91,10 +91,10 @@ Este teste verifica a funcionalidade dos métodos CRUD do controlador. Um mock d
 - `Testes de Integração`:
 Este teste cobre a publicação e o consumo de mensagens no RabbitMQ. O que o teste de integração realiza:
 
-1 - Cria e declara uma fila de teste no RabbitMQ para simular o ambiente de produção.
-2 - Publica um objeto NovoContato na fila, simulando a operação de criação de um novo contato.
-3 - Consome a mensagem da fila e verifica se ela foi recebida corretamente.
-4 - Assegura que a mensagem recebida não é nula e que os dados correspondem exatamente ao que foi enviado, garantindo a integridade da comunicação entre os serviços.
+- Cria e declara uma fila de teste no RabbitMQ para simular o ambiente de produção.
+- Publica um objeto NovoContato na fila, simulando a operação de criação de um novo contato.
+- Consome a mensagem da fila e verifica se ela foi recebida corretamente.
+- Assegura que a mensagem recebida não é nula e que os dados correspondem exatamente ao que foi enviado, garantindo a integridade da comunicação entre os serviços.
 
 Além disso, o teste também valida a funcionalidade do endpoint de criação de contatos da API, garantindo que a requisição para adicionar um novo contato seja bem-sucedida e retorne o status esperado.
 
