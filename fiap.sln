@@ -60,6 +60,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dashboards", "dashboards", 
 		..\Users\felip\Desktop\grafana\provisioning\dashboards\GrafPromAPIDashboard.json = ..\Users\felip\Desktop\grafana\provisioning\dashboards\GrafPromAPIDashboard.json
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "prometheus", "prometheus", "{178D5BF7-20CD-40DC-A7B3-D093EC2A0EE5}"
+	ProjectSection(SolutionItems) = preProject
+		..\Users\felip\Desktop\prometheus\prometheus.yml = ..\Users\felip\Desktop\prometheus\prometheus.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
