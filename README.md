@@ -39,9 +39,9 @@ Nesta etapa, a iniciativa evolui para incorporar conceitos mais avançados, como
 
 * Objetivos Principais
 
- - Arquitetura de Microsserviços: Transformar o aplicativo monolítico em um conjunto de microsserviços independentes, cada um encarregado de uma funcionalidade específica (como cadastro, consulta, atualização e exclusão de contatos).
- - Comunicação Assíncrona: Implementar o RabbitMQ para facilitar a comunicação entre os microsserviços, permitindo o envio de dados por meio de filas. Isso envolve a criação de um microsserviço que coleta dados e os envia para uma fila, onde um microsserviço consumidor irá processar essas informações e persistir no banco de dados.
- - Criar testes unitário e de integração
+Arquitetura de Microsserviços: Transformar o aplicativo monolítico em um conjunto de microsserviços independentes, cada um encarregado de uma funcionalidade específica (como cadastro, consulta, atualização e exclusão de contatos).
+Comunicação Assíncrona: Implementar o RabbitMQ para facilitar a comunicação entre os microsserviços, permitindo o envio de dados por meio de filas. Isso envolve a criação de um microsserviço que coleta dados e os envia para uma fila, onde um microsserviço consumidor irá processar essas informações e persistir no banco de dados.
+Criar testes unitário e de integração
 
 * Requisitos Técnicos
 
