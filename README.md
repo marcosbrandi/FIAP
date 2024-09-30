@@ -100,7 +100,7 @@ Além disso, o teste também valida a funcionalidade do endpoint de criação de
 
 
 # Tecnologias utilizadas
-- C#, .Net 8, Minimal API, InMemory Database, EF Core 8, OpenAPI
+- C#, .Net 8, Minimal API, Postgres, EF Core 8, OpenAPI, RabbitMQ
 
 # Link do Projeto no YouTube
 - https://www.youtube.com/watch?v=gmRAX21eDeo
