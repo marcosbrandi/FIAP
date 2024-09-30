@@ -83,7 +83,17 @@ Demonstração da comunicação entre microsserviços via RabbitMQ, ilustrando a
     - Os parâmetros devem corresponder ao body do json, há validações para Id e E-mail repetido
 - `Deletar Contato`: Exclui um contato existente com i Id informado como parâmetro
 
+- `Testes Unitário`:
+Um mock do IMessageBus é utilizado para simular a comunicação com o barramento de mensagens, permitindo que o controlador seja testado de forma isolada.
+Verifica a funcionalidade dos métodos (CRUD) do controlador
 
+- `Testes de Integração`:
+Nesta fase o teste cobre a publicação e o consumo de mensagens no RabbitMQ.
+RabbitMQ cria e declara uma fila de teste.
+Publica um objeto NovoContato na fila.
+Consome a mensagem da fila e verifica se ela foi recebida corretamente.
+Assegura que a mensagem recebida não é nula e que os dados correspondem ao que foi enviado.
+Verifica a funcionalidade do endpoint de criação de contatos da API, assegurando que a requisição para adicionar um novo contato seja bem-sucedida.
 
 # Tecnologias utilizadas
 - C#, .Net 8, Minimal API, InMemory Database, EF Core 8, OpenAPI
