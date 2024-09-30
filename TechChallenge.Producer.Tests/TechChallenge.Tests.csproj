@@ -7,25 +7,21 @@
 
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="coverlet.collector" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.20.1" />
+    <PackageReference Include="Moq" Version="4.20.72" />
     <PackageReference Include="NUnit" Version="3.14.0" />
     <PackageReference Include="NUnit.Analyzers" Version="3.9.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.5.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Fiap.Core\Fiap.Core.csproj" />
-    <ProjectReference Include="..\Fiap.MessageBus\Fiap.MessageBus.csproj" />
-    <ProjectReference Include="..\Fiap.WebAPI.Core\Fiap.WebAPI.Core.csproj" />
     <ProjectReference Include="..\TechChallenge.API\TechChallenge.API.csproj" />
-    <ProjectReference Include="..\TechChallenge.Domain\TechChallenge.Domain.csproj" />
-    <ProjectReference Include="..\TechChallenge.Infrastructure\TechChallenge.Infrastructure.csproj" />
     <ProjectReference Include="..\TechChallenge.Producer\TechChallenge.Producer.csproj" />
   </ItemGroup>
 
