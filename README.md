@@ -6,7 +6,6 @@ Este repositório contém informações sobre as diferentes fases do projeto Tec
 - [Tech Challenge Fase 3](#tech-challenge-fase-3) <!-- Link para a seção da fase 3 -->
 - [Tech Challenge Fase 2](#tech-challenge-fase-2) <!-- Link para a seção da fase 2 -->
 - [Tech Challenge Fase 1](#tech-challenge-fase-1) <!-- Link para a seção da fase 1 -->
-- [Participantes do Projeto](#participantes-do-projeto) <!-- Link para a seção dos participantes -->
 
 ## Descrição do Projeto
 O **Tech Challenge** é um projeto desenvolvido em fases, abrangendo uma variedade de tópicos e habilidades. Cada fase possui seus objetivos específicos e requisitos técnicos.
@@ -30,13 +29,6 @@ O **Tech Challenge** é um projeto desenvolvido em fases, abrangendo uma varieda
 ## Tech Challenge Fase 1
 - Esta fase envolve a criação de um aplicativo utilizando a plataforma .NET 8 para cadastro de contatos regionais.
 - **Objetivos**: [Leia mais sobre a Fase 1](#tech-challenge-fase-1).
-
-## Participantes do Projeto
-
-- Gustavo Amaral (gustavo-amaral@hotmail.com)
-- Marcos Brandi Torres (marcosbrandi@hotmail.com)
-- Jhonas Nobre (jhonas_nobre@hotmail.com)
-- Júlio Valle (juliodovale2012@gmail.com)
 
 ## Contribuições
 Se você deseja contribuir para o projeto, fique à vontade para entrar em contato com os desenvolvedores mencionados nos READMEs de cada fase.
