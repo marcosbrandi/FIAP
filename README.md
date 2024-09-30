@@ -83,6 +83,8 @@ Demonstração da comunicação entre microsserviços via RabbitMQ, ilustrando a
     - Os parâmetros devem corresponder ao body do json, há validações para Id e E-mail repetido
 - `Deletar Contato`: Exclui um contato existente com i Id informado como parâmetro
 
+# Testes
+
 - `Testes Unitário`:
 Um mock do IMessageBus é utilizado para simular a comunicação com o barramento de mensagens, permitindo que o controlador seja testado de forma isolada.
 Verifica a funcionalidade dos métodos (CRUD) do controlador
