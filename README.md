@@ -1,4 +1,4 @@
-# Tech Challenge
+<h1 align="center">Tech Challenge - Grupo 60 FIAP ©2024</h1> 
 
 ## Fases do Projeto
 Este repositório contém informações sobre as diferentes fases do projeto Tech Challenge. Abaixo estão os links para as seções de cada fase:
