@@ -24,6 +24,12 @@
 
 * [Descrição do Projeto](#descrição-do-projeto)
 * [Funcionalidades e Demonstração da Aplicação](#funcionalidades-e-demonstração-da-aplicação)
+* [Endpoint Producer](#endpoint-producer)
+* [Endpoint Consumer](#endpoint-consumer)
+* [Testes](#testes)
+* [Docker](#docker)
+* [Prometheus](#prometheus)
+* [Grafana](#grafana)
 * [Tecnologias utilizadas](#tecnologias-utilizadas)
 * [Link do Projeto no YouTube](#link-do-projeto-no-youtube)
 * [Pessoas Desenvolvedoras do Projeto](#pessoas-desenvolvedoras-do-projeto)
@@ -68,20 +74,28 @@ Demonstração da comunicação entre microsserviços via RabbitMQ, ilustrando a
 - `Schemas`: 
 <img loading="lazy" width="40%" height="40%" src="https://github.com/marcosbrandi/FIAP/blob/master/Docs/Domain%20Storytelling/Schemas.PNG"/>
 
-- `Endpoints`: 
+# Endpoint Producer
+<!--
 <img loading="lazy" width="100%" height="100%" src="https://github.com/marcosbrandi/FIAP/blob/master/Docs/Domain%20Storytelling/Endpoints.PNG"/>
+-->
+<img loading="lazy" width="100%" height="100%" src="https://github.com/marcosbrandi/FIAP/blob/master/Docs/Domain%20Storytelling/Endpoint-Producer.jpg"/>
 
+- `Inserir Contato`: Cria um novo contato
+    - Os parâmetros devem corresponder ao body do json, há validações para Id e E-mail repetido
+- `Atualizar Contato`: Atualiza um contato existente
+    - Os parâmetros devem corresponder ao body do json, há validações para Id e E-mail repetido
+- `Deletar Contato`: Exclui um contato existente com i Id informado como parâmetro
+
+
+# Endpoint Consumer
+
+<img loading="lazy" width="100%" height="100%" src="https://github.com/marcosbrandi/FIAP/blob/master/Docs/Domain%20Storytelling/Endpoint-Consumer.jpg"/>
 
 - `Consulta por Nome`: Retorna um contato passando o Nome como parâmetro de busca
 - `Consulta por ID`: Retorna um contato passando Id de registro como parâmetro de busca
 - `Consulta por DDD`: Retorna os contatos correspondentes ao DDD recebido como parâmetro de busca
     - Se o DDD nâo for informado, retorna todos os contatos cadastrados
 - `Consulta de UF por DDD`: Retorna a UF correspondente ao DDD recebido como parâmetro de busca
-- `Inserir Contato`: Cria um novo contato
-    - Os parâmetros devem corresponder ao body do json, há validações para Id e E-mail repetido
-- `Atualizar Contato`: Atualiza um contato existente
-    - Os parâmetros devem corresponder ao body do json, há validações para Id e E-mail repetido
-- `Deletar Contato`: Exclui um contato existente com i Id informado como parâmetro
 
 # Testes
 
@@ -97,6 +111,16 @@ Este teste cobre a publicação e o consumo de mensagens no RabbitMQ. O que o te
 - Assegura que a mensagem recebida não é nula e que os dados correspondem exatamente ao que foi enviado, garantindo a integridade da comunicação entre os serviços.
 
 Além disso, o teste também valida a funcionalidade do endpoint de criação de contatos da API, garantindo que a requisição para adicionar um novo contato seja bem-sucedida e retorne o status esperado.
+
+# Docker
+<img loading="lazy" width="100%" height="100%" src="https://github.com/marcosbrandi/FIAP/blob/master/Docs/Domain%20Storytelling/Docker.jpg"/>
+
+# Prometheus
+<img loading="lazy" width="100%" height="100%" src="https://github.com/marcosbrandi/FIAP/blob/master/Docs/Domain%20Storytelling/Prometheus.jpg"/>
+
+# Grafana
+<img loading="lazy" width="100%" height="100%" src="https://github.com/marcosbrandi/FIAP/blob/master/Docs/Domain%20Storytelling/Grafana.jpg"/>
+
 
 
 # Tecnologias utilizadas
