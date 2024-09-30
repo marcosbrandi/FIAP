@@ -32,10 +32,11 @@ O **Tech Challenge** é um projeto desenvolvido em fases, abrangendo uma varieda
 - **Objetivos**: [Leia mais sobre a Fase 1](#tech-challenge-fase-1).
 
 ## Participantes do Projeto
-- Júlio Valle (juliodovale2012@gmail.com)
+
 - Gustavo Amaral (gustavo-amaral@hotmail.com)
 - Marcos Brandi Torres (marcosbrandi@hotmail.com)
 - Jhonas Nobre (jhonas_nobre@hotmail.com)
+- Júlio Valle (juliodovale2012@gmail.com)
 
 ## Contribuições
 Se você deseja contribuir para o projeto, fique à vontade para entrar em contato com os desenvolvedores mencionados nos READMEs de cada fase.
