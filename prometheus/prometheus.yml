@@ -20,3 +20,4 @@ scrape_configs:
       - targets: ['host.docker.internal:5432']
       - targets: ['host.docker.internal:5001']
       - targets: ['host.docker.internal:5000']
+      - targets: ['host.docker.internal:8080']
