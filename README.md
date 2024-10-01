@@ -98,6 +98,7 @@ Demonstração da comunicação entre microsserviços via RabbitMQ, ilustrando a
 - `Consulta de UF por DDD`: Retorna a UF correspondente ao DDD recebido como parâmetro de busca
 
 # Testes
+<img loading="lazy" width="100%" height="100%" src="https://github.com/marcosbrandi/FIAP/blob/master/Docs/Domain%20Storytelling/teste.jpg"/>
 
 - `Teste Unitário`:
 Este teste verifica a funcionalidade dos métodos CRUD do controlador. Um mock do IMessageBus é utilizado para simular a comunicação com o barramento de mensagens, permitindo que o controlador seja testado de forma isolada e assegurando que as lógicas internas funcionem corretamente sem depender de componentes externos.
