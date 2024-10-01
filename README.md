@@ -125,7 +125,7 @@ Além disso, o teste também valida a funcionalidade do endpoint de criação de
 
 
 # Tecnologias utilizadas
-- C#, .Net 8, Minimal API, Postgres, EF Core 8, OpenAPI, RabbitMQ, Docker, Grafana, Prometheus
+- C#, .Net 8, Minimal API, Postgres, EF Core 8, OpenAPI, RabbitMQ, Docker, Grafana, Prometheus, NUnit, Moq
 
 # Link do Projeto no YouTube
 - https://www.youtube.com/watch?v=gmRAX21eDeo
