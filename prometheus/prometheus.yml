@@ -17,7 +17,8 @@ scrape_configs:
 
     static_configs:
       - targets: ['host.docker.internal:9090']
-      - targets: ['host.docker.internal:5432']
-      - targets: ['host.docker.internal:5001']
-      - targets: ['host.docker.internal:5000']
       - targets: ['host.docker.internal:8080']
+      - targets: ['host.docker.internal:8082']
+      - targets: ['host.docker.internal:8090']
+      - targets: ['host.docker.internal:8091']
+      

@@ -3,11 +3,11 @@
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 USER app
 WORKDIR /app
-EXPOSE 8080
-EXPOSE 8081
+EXPOSE 8082:8082
+EXPOSE 8083:8083
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-ARG BUILD_CONFIGURATION=Release
+ARG BUILD_CONFIGURATION=Debug
 WORKDIR /src
 COPY ["TechChallenge.Producer/TechChallenge.Producer.csproj", "TechChallenge.Producer/"]
 COPY ["Fiap.Core/Fiap.Core.csproj", "Fiap.Core/"]
@@ -19,7 +19,7 @@ WORKDIR "/src/TechChallenge.Producer"
 RUN dotnet build "./TechChallenge.Producer.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
-ARG BUILD_CONFIGURATION=Release
+ARG BUILD_CONFIGURATION=Debug
 RUN dotnet publish "./TechChallenge.Producer.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final

@@ -25,8 +25,8 @@ services:
       context: .
       dockerfile: TechChallenge.API/Dockerfile
     ports: 
-       - "5000:5000"
-       - "5001:5001"
+       - "8080:8080"
+       - "8081:8081"
 
   techchallenge.producer:
     image: ${DOCKER_REGISTRY-}techchallengeproducer
@@ -34,8 +34,10 @@ services:
       context: .
       dockerfile: TechChallenge.Producer/Dockerfile
     ports: 
-       - "5002:5002"
-       - "5003:5003"
+       - "8082:8082"
+       - "8083:8083"
+
+
   prometheus:
     image: prom/prometheus
     container_name: prometheus

@@ -52,10 +52,10 @@ namespace TechChallenge.Consumer
             app.UseHttpMetrics();
             app.UsePrometheusServer();
 
+            PrometheusEndpoints.Configure(app);
             //ContatoEndpoints.Map(app);
             ContatoEndpoints.Map1(app);
             BuscarContatos.AddRoutes(app);
-            PrometheusEndpoints.Configure(app);
 
             app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Contatos API V1"); });
 

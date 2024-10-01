@@ -1,5 +1,8 @@
 
 using Fiap.Identidade.Producer.Configuration;
+using Prometheus;
+using Prometheus.Client.AspNetCore;
+using TechChallengeFIAP.API.Middleware;
 
 namespace TechChallenge.Producer
 {
@@ -26,7 +29,14 @@ namespace TechChallenge.Producer
                 app.UseSwaggerUI();
             }
 
-            app.UseHttpsRedirection();
+			//These metrics are called to use prometheus
+			app.UseMetricServer();
+			app.UseHttpMetrics();
+			app.UsePrometheusServer();
+
+			PrometheusEndpoints.Configure(app);
+
+			app.UseHttpsRedirection();
 
             app.UseAuthorization();
 
