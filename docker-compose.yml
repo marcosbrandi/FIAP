@@ -28,6 +28,7 @@ services:
        - "8080:8080"
        - "8081:8081"
 
+
   techchallenge.producer:
     image: ${DOCKER_REGISTRY-}techchallengeproducer
     build:
@@ -36,6 +37,7 @@ services:
     ports: 
        - "8082:8082"
        - "8083:8083"
+
 
 
   prometheus:
@@ -52,9 +54,12 @@ services:
         timeout: 3s
         retries: 10
         start_period: 10s
+
+
+
   grafana:
     container_name: grafana
-    image: grafana/grafana:master
+    image: grafana/grafana
     ports:
       - "3000:3000"
     volumes:
@@ -69,6 +74,9 @@ services:
         timeout: 3s
         retries: 10
         start_period: 10s
+   
+
+
 
   # techchallengefiap.unittests:
   #   image: ${DOCKER_REGISTRY-}techchallengefiapunittests

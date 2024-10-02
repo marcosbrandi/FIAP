@@ -1,5 +1,5 @@
 global:
-  scrape_interval:     15s # By default, scrape targets every 15 seconds.
+  scrape_interval:     20s # By default, scrape targets every 15 seconds.
 
   # Attach these labels to any time series or alerts when communicating with
   # external systems (federation, remote storage, Alertmanager).
@@ -14,11 +14,11 @@ scrape_configs:
 
     # Override the global default and scrape targets from this job every 5 seconds.
     scrape_interval: 5s
+    tls_config:
+      insecure_skip_verify: true 
 
     static_configs:
-      - targets: ['host.docker.internal:9090']
       - targets: ['host.docker.internal:8080']
       - targets: ['host.docker.internal:8082']
-      - targets: ['host.docker.internal:8090']
-      - targets: ['host.docker.internal:8091']
-      
+      - targets: ['host.docker.internal:8081']
+      - targets: ['host.docker.internal:8083']      

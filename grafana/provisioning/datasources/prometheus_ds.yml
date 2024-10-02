@@ -1,0 +1,27 @@
+datasources:
+- name: prometheus
+  access: proxy
+  type: prometheus
+  url: http://host.docker.internal:8082/metrics
+  isDefault: true
+  tlsSkipVerify: true
+  
+- name: prometheus1
+  access: proxy
+  type: prometheus
+  url: http://host.docker.internal:8080/metrics
+  isDefault: true
+  tlsSkipVerify: true
+
+- name: prometheus2
+  access: proxy
+  type: prometheus
+  url: http://host.docker.internal:8082/
+  isDefault: true
+  tlsSkipVerify: true
+- name: prometheus3
+  access: proxy
+  type: prometheus
+  url: http://host.docker.internal:8080/
+  isDefault: true
+  tlsSkipVerify: true
