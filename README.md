@@ -128,7 +128,7 @@ Além disso, o teste também valida a funcionalidade do endpoint de criação de
 - C#, .Net 8, Minimal API, Postgres, EF Core 8, OpenAPI, RabbitMQ, Docker, Grafana, Prometheus, NUnit, Moq
 
 # Link do Projeto no YouTube
-- [https://www.youtube.com/watch?v=gmRAX21eDeo](https://studio.youtube.com/video/NhjSDDoncQM/edit)
+- [[https://www.youtube.com/watch?v=gmRAX21eDeo](https://studio.youtube.com/video/NhjSDDoncQM/edit)](https://www.youtube.com/watch?v=NhjSDDoncQM)
 <!--# Pessoas Contribuidoras-->
 
 # Pessoas Desenvolvedoras do Projeto
