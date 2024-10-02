@@ -114,13 +114,13 @@ Este teste cobre a publicação e o consumo de mensagens no RabbitMQ. O que o te
 Além disso, o teste também valida a funcionalidade do endpoint de criação de contatos da API, garantindo que a requisição para adicionar um novo contato seja bem-sucedida e retorne o status esperado.
 
 # Docker
-<img loading="lazy" width="100%" height="100%" src="https://github.com/marcosbrandi/FIAP/blob/master/Docs/Domain%20Storytelling/Docker1.png"/>
+<img loading="lazy" width="100%" height="100%" src="https://github.com/marcosbrandi/FIAP/blob/master/Docs/Domain%20Storytelling/Docker.jpg"/>
 
 # Prometheus
 <img loading="lazy" width="100%" height="100%" src="https://github.com/marcosbrandi/FIAP/blob/master/Docs/Domain%20Storytelling/Prometheus.jpg"/>
 
 # Grafana
-<img loading="lazy" width="100%" height="100%" src="https://github.com/marcosbrandi/FIAP/blob/master/Docs/Domain%20Storytelling/Grafana.jpg"/>
+<img loading="lazy" width="100%" height="100%" src="https://github.com/marcosbrandi/FIAP/blob/master/Docs/Domain%20Storytelling/Grafana.png"/>
 
 
 
