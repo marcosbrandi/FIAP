@@ -1,9 +1,10 @@
 version: '3.4'
 
 volumes:
+  prometheus_data: {}
   grafana_data: {}
-  rabbitmq_data:
-  rabbitmq_log:
+  rabbitmq_data: {}
+  rabbitmq_log: {}
 services:
 
   techchallenge.rabbitmq:
@@ -19,14 +20,16 @@ services:
         - rabbitmq_data:/var/lib/rabbitmq
         - rabbitmq_log:/var/lib/rabbitmq
 
+
   techchallenge.api:
     image: ${DOCKER_REGISTRY-}techchallengeapi
     build:
       context: .
       dockerfile: TechChallenge.API/Dockerfile
     ports: 
-       - "5000:5000"
-       - "5001:5001"
+       - "8080:8080"
+       - "8081:8081"
+
 
   techchallenge.producer:
     image: ${DOCKER_REGISTRY-}techchallengeproducer
@@ -34,22 +37,22 @@ services:
       context: .
       dockerfile: TechChallenge.Producer/Dockerfile
     ports: 
-       - "5002:5002"
-       - "5003:5003"
+       - "8090:8090"
+       - "8091:8091"
+
+
   prometheus:
-    image: prom/prometheus
+    image: prom/prometheus:latest
     container_name: prometheus
     restart: always
     ports:
-      - 9090:9090
+      - 3031:9090
     volumes:
-      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
-    healthcheck:
-        test: wget -q --tries=1 -O- http://localhost:9090/
-        interval: 3s
-        timeout: 3s
-        retries: 10
-        start_period: 10s
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+
+
   grafana:
     container_name: grafana
     image: grafana/grafana:master
@@ -58,21 +61,7 @@ services:
     volumes:
         - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
         - ./grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
-    depends_on:
-        prometheus:
-            condition: service_healthy
-    healthcheck:
-        test: wget -q --tries=1 -O- http://localhost:3000/
-        interval: 3s
-        timeout: 3s
-        retries: 10
-        start_period: 10s
 
-  # techchallengefiap.unittests:
-  #   image: ${DOCKER_REGISTRY-}techchallengefiapunittests
-  #   build:
-  #     context: .
-  #     dockerfile: TechChallengeFIAP.UnitTests/Dockerfile
 
   techchallengefiap.database:
       image: postgres:latest
@@ -87,8 +76,8 @@ services:
         - 5432:5432
 
 
-
-        
-   
-
-
+  techchallenge.tests:
+    image: ${DOCKER_REGISTRY-}techchallengetests
+    build:
+      context: .
+      dockerfile: TechChallenge.Producer.Tests/Dockerfile

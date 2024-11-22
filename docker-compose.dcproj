@@ -16,4 +16,7 @@
     <None Include="docker-compose.yml" />
     <None Include=".dockerignore" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="prometheus\" />
+  </ItemGroup>
 </Project>

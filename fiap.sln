@@ -45,24 +45,19 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechChallenge.Tests", "TechChallenge.Producer.Tests\TechChallenge.Tests.csproj", "{13A11C49-6329-4E5C-ADE6-44E1988CC12A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "grafana2", "grafana2", "{176EB89F-59D6-420F-A7BB-945C0372B3DC}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "grafana", "grafana", "{4223C9FF-0563-4C65-9F44-EC439631B07C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "provisioning", "provisioning", "{52D4B034-0D82-46EB-8BEB-DD443DDCEAF9}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "provisioning", "provisioning", "{F75B7DD4-A09B-4D00-B43D-8CA00528ABD7}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "datasources", "datasources", "{FFA8533F-3A52-4B85-8251-567C06103398}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dashboards", "dashboards", "{010D0169-F597-4259-9BC3-8F35878E80C4}"
 	ProjectSection(SolutionItems) = preProject
-		..\Users\felip\Desktop\grafana\provisioning\datasources\prometheus_ds.yml = ..\Users\felip\Desktop\grafana\provisioning\datasources\prometheus_ds.yml
+		E:\Repositorios\FIAP-master\grafana\provisioning\dashboards\dashboard.yml = E:\Repositorios\FIAP-master\grafana\provisioning\dashboards\dashboard.yml
+		E:\Repositorios\FIAP-master\grafana\provisioning\dashboards\GrafPromAPIDashboard.json = E:\Repositorios\FIAP-master\grafana\provisioning\dashboards\GrafPromAPIDashboard.json
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dashboards", "dashboards", "{78442779-8903-4A48-8CA5-55DEA5002396}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "datasources", "datasources", "{49527694-9DD2-4106-B27E-CB85B63090D7}"
 	ProjectSection(SolutionItems) = preProject
-		..\Users\felip\Desktop\grafana\provisioning\dashboards\dashboard.yml = ..\Users\felip\Desktop\grafana\provisioning\dashboards\dashboard.yml
-		..\Users\felip\Desktop\grafana\provisioning\dashboards\GrafPromAPIDashboard.json = ..\Users\felip\Desktop\grafana\provisioning\dashboards\GrafPromAPIDashboard.json
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "prometheus", "prometheus", "{178D5BF7-20CD-40DC-A7B3-D093EC2A0EE5}"
-	ProjectSection(SolutionItems) = preProject
-		..\Users\felip\Desktop\prometheus\prometheus.yml = ..\Users\felip\Desktop\prometheus\prometheus.yml
+		E:\Repositorios\FIAP-master\grafana\provisioning\datasources\prometheus_ds.yml = E:\Repositorios\FIAP-master\grafana\provisioning\datasources\prometheus_ds.yml
 	EndProjectSection
 EndProject
 Global
@@ -127,9 +122,9 @@ Global
 		{30152081-F45E-469D-841A-0BFB2283FF4D} = {DC9412CA-FA82-4B39-B5B7-F00D1E6E48B6}
 		{2F7F5C7A-543C-4C54-ADA3-4EE3C0E9C836} = {2E87E231-1909-40A4-8F7D-2B4B31F40E06}
 		{13A11C49-6329-4E5C-ADE6-44E1988CC12A} = {7B6D9BC4-90CC-49DE-A945-4EF9127A84C7}
-		{52D4B034-0D82-46EB-8BEB-DD443DDCEAF9} = {176EB89F-59D6-420F-A7BB-945C0372B3DC}
-		{FFA8533F-3A52-4B85-8251-567C06103398} = {52D4B034-0D82-46EB-8BEB-DD443DDCEAF9}
-		{78442779-8903-4A48-8CA5-55DEA5002396} = {52D4B034-0D82-46EB-8BEB-DD443DDCEAF9}
+		{F75B7DD4-A09B-4D00-B43D-8CA00528ABD7} = {4223C9FF-0563-4C65-9F44-EC439631B07C}
+		{010D0169-F597-4259-9BC3-8F35878E80C4} = {F75B7DD4-A09B-4D00-B43D-8CA00528ABD7}
+		{49527694-9DD2-4106-B27E-CB85B63090D7} = {F75B7DD4-A09B-4D00-B43D-8CA00528ABD7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ED538F64-DADC-4075-A337-4331267F2714}

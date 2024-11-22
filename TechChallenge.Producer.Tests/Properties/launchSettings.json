@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "TechChallenge.Tests": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}

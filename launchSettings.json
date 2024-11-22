@@ -6,7 +6,7 @@
       "serviceActions": {
         "techchallenge.api": "StartDebugging",
         "techchallenge.producer": "StartDebugging",
-        "techchallengefiap.unittests": "StartDebugging"
+        "techchallenge.tests": "StartDebugging"
       }
     }
   }
