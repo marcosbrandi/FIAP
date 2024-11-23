@@ -1,5 +1,7 @@
 
 using Fiap.Identidade.Producer.Configuration;
+using Prometheus;
+using Prometheus.Client.AspNetCore;
 
 namespace TechChallenge.Producer
 {
@@ -9,10 +11,13 @@ namespace TechChallenge.Producer
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddHttpClient();
+
             builder.Services.AddControllers();
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
+
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddMessageBusConfiguration(builder.Configuration);
@@ -26,10 +31,13 @@ namespace TechChallenge.Producer
                 app.UseSwaggerUI();
             }
 
+            app.UseMetricServer();
+            app.UseHttpMetrics();
+            app.UsePrometheusServer();
+
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 

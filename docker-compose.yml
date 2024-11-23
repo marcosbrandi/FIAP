@@ -20,7 +20,6 @@ services:
         - rabbitmq_data:/var/lib/rabbitmq
         - rabbitmq_log:/var/lib/rabbitmq
 
-
   techchallenge.api:
     image: ${DOCKER_REGISTRY-}techchallengeapi
     build:
@@ -30,16 +29,14 @@ services:
        - "8080:8080"
        - "8081:8081"
 
-
   techchallenge.producer:
     image: ${DOCKER_REGISTRY-}techchallengeproducer
     build:
       context: .
       dockerfile: TechChallenge.Producer/Dockerfile
     ports: 
-       - "8090:8090"
-       - "8091:8091"
-
+       - "5000:5000"
+       - "5001:5001"
 
   prometheus:
     image: prom/prometheus:latest
@@ -52,7 +49,6 @@ services:
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
 
-
   grafana:
     container_name: grafana
     image: grafana/grafana:master
@@ -61,7 +57,6 @@ services:
     volumes:
         - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
         - ./grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
-
 
   techchallengefiap.database:
       image: postgres:latest
@@ -75,9 +70,9 @@ services:
       ports:
         - 5432:5432
 
-
   techchallenge.tests:
     image: ${DOCKER_REGISTRY-}techchallengetests
     build:
       context: .
       dockerfile: TechChallenge.Producer.Tests/Dockerfile
+
