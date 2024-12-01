@@ -47,15 +47,15 @@ namespace TechChallenge.Consumer
             if (app.Environment.IsDevelopment()) { app.UseDeveloperExceptionPage(); }
             app.UseSwagger();
 
-            //These metrics are called to use prometheus
-            app.UseMetricServer();
-            app.UseHttpMetrics();
-            app.UsePrometheusServer();
-
             //ContatoEndpoints.Map(app);
             ContatoEndpoints.Map1(app);
             BuscarContatos.AddRoutes(app);
             PrometheusEndpoints.Configure(app);
+
+            //These metrics are called to use prometheus
+            app.UseMetricServer();
+            app.UseHttpMetrics();
+            app.UsePrometheusServer();
 
             app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Contatos API V1"); });
 

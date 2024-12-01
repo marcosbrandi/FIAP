@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-tc-api
+spec:
+  selector:
+    matchLabels:
+      app: deploy-tc-api
+  template:
+    metadata:
+      labels:
+        app: deploy-tc-api
+    spec:
+      containers:
+      - name: deploy-tc-api
+        image: nginx
+        resources:
+          limits:
+            memory: "256Mi"
+            cpu: "1000m"
+        ports:
+        - containerPort: 80

@@ -1,5 +1,3 @@
-version: '3.4'
-
 volumes:
   prometheus_data: {}
   grafana_data: {}
@@ -21,22 +19,29 @@ services:
         - rabbitmq_log:/var/lib/rabbitmq
 
   techchallenge.api:
-    image: ${DOCKER_REGISTRY-}techchallengeapi
+    image: solid12/techchallengeapi
     build:
       context: .
       dockerfile: TechChallenge.API/Dockerfile
     ports: 
        - "8080:8080"
        - "8081:8081"
-
+  
   techchallenge.producer:
-    image: ${DOCKER_REGISTRY-}techchallengeproducer
+    image: solid12/techchallengeproducer
     build:
       context: .
       dockerfile: TechChallenge.Producer/Dockerfile
     ports: 
        - "5000:5000"
        - "5001:5001"
+
+  techchallenge.tests:
+    image: solid12/techchallengetests
+    build:
+      context: .
+      dockerfile: .\TechChallenge.Producer.Tests\Dockerfile
+
 
   prometheus:
     image: prom/prometheus:latest
@@ -69,10 +74,4 @@ services:
         - ./.containers/techchallengefiap-db:/var/lib/postgresql/data1  
       ports:
         - 5432:5432
-
-  techchallenge.tests:
-    image: ${DOCKER_REGISTRY-}techchallengetests
-    build:
-      context: .
-      dockerfile: TechChallenge.Producer.Tests/Dockerfile
 

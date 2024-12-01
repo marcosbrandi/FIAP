@@ -60,6 +60,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "datasources", "datasources"
 		E:\Repositorios\FIAP-master\grafana\provisioning\datasources\prometheus_ds.yml = E:\Repositorios\FIAP-master\grafana\provisioning\datasources\prometheus_ds.yml
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kubernetes", "Kubernetes", "{18533AF5-4DAE-4107-8112-39CACCE73999}"
+	ProjectSection(SolutionItems) = preProject
+		tc-api.yaml = tc-api.yaml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -125,6 +130,7 @@ Global
 		{F75B7DD4-A09B-4D00-B43D-8CA00528ABD7} = {4223C9FF-0563-4C65-9F44-EC439631B07C}
 		{010D0169-F597-4259-9BC3-8F35878E80C4} = {F75B7DD4-A09B-4D00-B43D-8CA00528ABD7}
 		{49527694-9DD2-4106-B27E-CB85B63090D7} = {F75B7DD4-A09B-4D00-B43D-8CA00528ABD7}
+		{18533AF5-4DAE-4107-8112-39CACCE73999} = {BF76ED7B-929B-49D7-B536-19F374848AE4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ED538F64-DADC-4075-A337-4331267F2714}
