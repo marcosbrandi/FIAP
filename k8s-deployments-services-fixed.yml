@@ -1,0 +1,280 @@
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: techchallenge.rabbitmq
+  spec:
+    replicas: 3
+    selector:
+      matchLabels:
+        app: techchallenge.rabbitmq
+    template:
+      metadata:
+        labels:
+          app: techchallenge.rabbitmq
+      spec:
+        containers:
+        - name: techchallenge.rabbitmq
+          image: ${DOCKER_REGISTRY-}masstransit/rabbitmq
+          ports:
+          - containerPort: 15672
+          - containerPort: 5672
+          env:
+          - name: RABBITMQ_DEFAULT_USER
+            value: guest
+          - name: RABBITMQ_DEFAULT_PASS
+            value: guest
+          volumeMounts:
+          - name: -var-lib-rabbitmq
+            mountPath: /var/lib/rabbitmq
+          - name: -var-lib-rabbitmq
+            mountPath: /var/lib/rabbitmq
+        volumes:
+        - name: -var-lib-rabbitmq
+          emptyDir: {}
+        - name: -var-lib-rabbitmq
+          emptyDir: {}
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: techchallenge.api
+  spec:
+    replicas: 3
+    selector:
+      matchLabels:
+        app: techchallenge.api
+    template:
+      metadata:
+        labels:
+          app: techchallenge.api
+      spec:
+        containers:
+        - name: techchallenge.api
+          image: solid12/techchallengeapi
+          ports:
+          - containerPort: 8080
+          - containerPort: 8081
+          env: []
+          volumeMounts: []
+        volumes: []
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: techchallenge.producer
+  spec:
+    replicas: 3
+    selector:
+      matchLabels:
+        app: techchallenge.producer
+    template:
+      metadata:
+        labels:
+          app: techchallenge.producer
+      spec:
+        containers:
+        - name: techchallenge.producer
+          image: solid12/techchallengeproducer
+          ports:
+          - containerPort: 5000
+          - containerPort: 5001
+          env: []
+          volumeMounts: []
+        volumes: []
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: techchallenge.tests
+  spec:
+    replicas: 3
+    selector:
+      matchLabels:
+        app: techchallenge.tests
+    template:
+      metadata:
+        labels:
+          app: techchallenge.tests
+      spec:
+        containers:
+        - name: techchallenge.tests
+          image: solid12/techchallengetests
+          ports: []
+          env: []
+          volumeMounts: []
+        volumes: []
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: prometheus
+  spec:
+    replicas: 3
+    selector:
+      matchLabels:
+        app: prometheus
+    template:
+      metadata:
+        labels:
+          app: prometheus
+      spec:
+        containers:
+        - name: prometheus
+          image: prom/prometheus:latest
+          ports:
+          - containerPort: 3031
+          env: []
+          volumeMounts:
+          - name: -etc-prometheus-prometheus.yml
+            mountPath: /etc/prometheus/prometheus.yml
+        volumes:
+        - name: -etc-prometheus-prometheus.yml
+          emptyDir: {}
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: grafana
+  spec:
+    replicas: 3
+    selector:
+      matchLabels:
+        app: grafana
+    template:
+      metadata:
+        labels:
+          app: grafana
+      spec:
+        containers:
+        - name: grafana
+          image: grafana/grafana:master
+          ports:
+          - containerPort: 3000
+          env: []
+          volumeMounts:
+          - name: -etc-grafana-provisioning-datasources
+            mountPath: /etc/grafana/provisioning/datasources
+          - name: -etc-grafana-provisioning-dashboards
+            mountPath: /etc/grafana/provisioning/dashboards
+        volumes:
+        - name: -etc-grafana-provisioning-datasources
+          emptyDir: {}
+        - name: -etc-grafana-provisioning-dashboards
+          emptyDir: {}
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: techchallengefiap.database
+  spec:
+    replicas: 3
+    selector:
+      matchLabels:
+        app: techchallengefiap.database
+    template:
+      metadata:
+        labels:
+          app: techchallengefiap.database
+      spec:
+        containers:
+        - name: techchallengefiap.database
+          image: postgres:latest
+          ports:
+          - containerPort: 5432
+          env:
+          - name: POSTGRES_DB
+            value: FIAP
+          - name: POSTGRES_USER
+            value: postgres
+          - name: POSTGRES_PASSWORD
+            value: postgres
+          volumeMounts:
+          - name: -var-lib-postgresql-data1
+            mountPath: /var/lib/postgresql/data1
+        volumes:
+        - name: -var-lib-postgresql-data1
+          emptyDir: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: techchallenge.rabbitmq
+  spec:
+    selector:
+      app: techchallenge.rabbitmq
+    ports:
+    - protocol: TCP
+      port: 15672
+      targetPort: 15672
+    - protocol: TCP
+      port: 5672
+      targetPort: 5672
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: techchallenge.api
+  spec:
+    selector:
+      app: techchallenge.api
+    ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+    - protocol: TCP
+      port: 8081
+      targetPort: 8081
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: techchallenge.producer
+  spec:
+    selector:
+      app: techchallenge.producer
+    ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+    - protocol: TCP
+      port: 5001
+      targetPort: 5001
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: techchallenge.tests
+  spec:
+    selector:
+      app: techchallenge.tests
+    ports: []
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: prometheus
+  spec:
+    selector:
+      app: prometheus
+    ports:
+    - protocol: TCP
+      port: 3031
+      targetPort: 3031
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: grafana
+  spec:
+    selector:
+      app: grafana
+    ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: techchallengefiap.database
+  spec:
+    selector:
+      app: techchallengefiap.database
+    ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432
+    type: ClusterIP

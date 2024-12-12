@@ -35,7 +35,7 @@
     <ProjectReference Include="..\Fiap.MessageBus\Fiap.MessageBus.csproj" />
     <ProjectReference Include="..\Fiap.WebAPI.Core\Fiap.WebAPI.Core.csproj" />
     <ProjectReference Include="..\TechChallenge.Domain\TechChallenge.Domain.csproj" />
-    <ProjectReference Include="..\TechChallenge.Infrastructure\TechChallenge.Infrastructure.csproj" />
+    <ProjectReference Include="..\TechChallenge.Infrastructure\TechChallenge.Infrastructure.csproj" /> 
   </ItemGroup>
 
   <ItemGroup>
